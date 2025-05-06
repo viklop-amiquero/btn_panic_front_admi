@@ -1,0 +1,45 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Usuario</mat-label>
+        <input
+            matInput
+            placeholder="Ingresa tu usuario"
+            formControlName="username"
+        />
+        <mat-error *ngIf="isInvalidField('username')">
+            {{ getErrorMessage('username') }}
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input
+            matInput
+            [type]="showPassword ? 'password' : 'text'"
+            placeholder="Ingresa tu contraseña"
+            formControlName="password"
+        />
+        <button
+            mat-icon-button
+            matSuffix
+            (click)="showPassword = !showPassword"
+            type="button"
+        >
+            <mat-icon>{{
+                showPassword ? 'visibility_off' : 'visibility'
+            }}</mat-icon>
+        </button>
+        <mat-error *ngIf="isInvalidField('password')">
+            La contraseña es requerida
+        </mat-error>
+    </mat-form-field>
+
+    <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="loginForm.invalid"
+    >
+        Iniciar sesión
+    </button>
+</form>
