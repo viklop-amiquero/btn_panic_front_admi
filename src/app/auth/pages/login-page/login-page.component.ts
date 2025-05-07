@@ -7,6 +7,7 @@ import { AuthService } from '../../services/auth/auth.service'
 import { AuthResponse } from '../../models/responses/auth.response'
 import { Router } from '@angular/router'
 import { SnackbarService } from '../../../shared/services/snackbar/snackbar.service'
+import { PasswordVisibilityHandler } from '../../../shared/helpers/password-visibility.helper'
 
 @Component({
     selector: 'app-login-page',
@@ -17,7 +18,8 @@ import { SnackbarService } from '../../../shared/services/snackbar/snackbar.serv
 export class LoginPageComponent implements OnInit {
     private _fb: FormBuilder = new FormBuilder()
     public routesName = RoutesName
-    public showPassword: boolean = false
+    // public showPassword: boolean = false
+    public showPassword = new PasswordVisibilityHandler()
 
     constructor(
         private _validator: ValidatorsService,
@@ -41,9 +43,9 @@ export class LoginPageComponent implements OnInit {
         })
     }
 
-    togglePasswordVisibility() {
-        this.showPassword = !this.showPassword
-    }
+    // togglePasswordVisibility() {
+    //     this.showPassword = !this.showPassword
+    // }
 
     getCurrentCredentials(): AuthRequest {
         const data = this.loginForm.value

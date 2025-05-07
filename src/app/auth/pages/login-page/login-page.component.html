@@ -17,19 +17,17 @@
         <mat-label>Contraseña</mat-label>
         <input
             matInput
-            [type]="showPassword ? 'password' : 'text'"
+            [type]="showPassword.inputType"
             placeholder="Ingresa tu contraseña"
             formControlName="password"
         />
         <button
             mat-icon-button
             matSuffix
-            (click)="showPassword = !showPassword"
+            (click)="showPassword.toggle()"
             type="button"
         >
-            <mat-icon>{{
-                showPassword ? 'visibility_off' : 'visibility'
-            }}</mat-icon>
+            <mat-icon>{{ showPassword.icon }}</mat-icon>
         </button>
         <mat-error *ngIf="isInvalidField('password')">
             La contraseña es requerida
