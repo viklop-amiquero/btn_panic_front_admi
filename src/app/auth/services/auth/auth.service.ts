@@ -3,13 +3,15 @@ import { Injectable, inject } from '@angular/core'
 import { environment } from '../../../../environments/environment'
 import { AuthRequest } from '../../models/requests/auth.request'
 import { AuthResponse } from '../../models/responses/auth.response'
-import { catchError, throwError, Observable } from 'rxjs'
+import { catchError, throwError, Observable, of } from 'rxjs'
+import { TokenService } from '../../../shared/services/token/token.service'
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
     private readonly _http = inject(HttpClient)
+    private readonly _tokenService = inject(TokenService)
     private readonly _apiUrl: string = environment.apiUrl
     constructor() {}
 
@@ -45,5 +47,10 @@ export class AuthService {
                     return throwError(() => error)
                 })
             )
+    }
+
+    checkAuthentication(): Observable<boolean> {
+        const token = this._tokenService.getToken()
+        return of(!!token)
     }
 }

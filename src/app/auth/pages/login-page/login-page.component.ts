@@ -8,6 +8,8 @@ import { AuthResponse } from '../../models/responses/auth.response'
 import { Router } from '@angular/router'
 import { SnackbarService } from '../../../shared/services/snackbar/snackbar.service'
 import { PasswordVisibilityHandler } from '../../../shared/helpers/password-visibility.helper'
+import { TokenService } from '../../../shared/services/token/token.service'
+import { LocalStorageService } from '../../../shared/services/localstorage/local-storage.service'
 
 @Component({
     selector: 'app-login-page',
@@ -25,7 +27,9 @@ export class LoginPageComponent implements OnInit {
         private _validator: ValidatorsService,
         private _authService: AuthService,
         private _snackBarService: SnackbarService,
-        private _router: Router
+        private _router: Router,
+        private _tokenService: TokenService,
+        private _localStorageService: LocalStorageService
     ) {}
 
     public loginForm!: FormGroup
@@ -67,8 +71,8 @@ export class LoginPageComponent implements OnInit {
         }
 
         this._authService.login(this.getCurrentCredentials()).subscribe({
-            next: async (resp: AuthResponse) => {
-                if (!resp.token) {
+            next: async ({ token }: AuthResponse) => {
+                if (!token) {
                     this._snackBarService.warning(
                         'Respuesta inesperada del servidor.',
                         3000
@@ -76,14 +80,16 @@ export class LoginPageComponent implements OnInit {
 
                     return
                 }
-                console.log(resp)
+                // console.log()
                 // Almacenar el token
+                this._localStorageService.setLocalStorage('authToken', token)
                 // await Preferences.set({ key: 'authToken', value: resp.token })
 
                 this.loginForm.reset()
 
                 // Redirigir a home
                 this._snackBarService.success('login exitoso', 3000)
+                this._router.navigate([RoutesName.INDEX.route])
                 // this._router.navigate([RoutesName.INDEX.route])
             },
             error: (err) => {
