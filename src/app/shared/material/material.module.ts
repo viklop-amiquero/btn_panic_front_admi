@@ -7,7 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatIconModule } from '@angular/material/icon'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
-
+import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatListModule } from '@angular/material/list'
 @NgModule({
     exports: [
         MatTableModule,
@@ -18,6 +19,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
         MatIconModule,
         MatToolbarModule,
         MatSnackBarModule,
+        MatSidenavModule,
+        MatListModule,
     ],
 })
 export class MaterialModule {}
