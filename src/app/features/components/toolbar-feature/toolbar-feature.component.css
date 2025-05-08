@@ -1,0 +1,23 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  mat-toolbar {
+    background-color: #9ae600;
+  }
+
+  .left-section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .logo {
+    width: 48px;
+    height: auto;
+  }
+
+  .app-name {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #000;
+  }

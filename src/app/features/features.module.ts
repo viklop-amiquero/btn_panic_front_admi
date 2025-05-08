@@ -6,12 +6,16 @@ import { DashboardPageComponent } from './dashboard/pages/dashboard-page/dashboa
 import { IndexPageComponent } from './dashboard/pages/index-page/index-page.component'
 import { FeatureLayoutComponent } from './layout/feature-layout/feature-layout.component'
 import { SharedModule } from '../shared/shared.module'
+import { SidenavFeatureComponent } from './components/sidenav-feature/sidenav-feature.component'
+import { ToolbarFeatureComponent } from './components/toolbar-feature/toolbar-feature.component'
 
 @NgModule({
     declarations: [
         DashboardPageComponent,
         IndexPageComponent,
         FeatureLayoutComponent,
+        SidenavFeatureComponent,
+        ToolbarFeatureComponent,
     ],
     imports: [CommonModule, FeaturesRoutingModule, SharedModule],
 })
