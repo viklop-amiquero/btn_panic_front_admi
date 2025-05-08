@@ -2,7 +2,9 @@
     flex: 1 1 auto;
   }
   mat-toolbar {
+    /* z-index: 5; */
     background-color: #9ae600;
+    height: 64px;
   }
 
   .left-section {
@@ -20,4 +22,10 @@
     font-size: 1.6rem;
     font-weight: 500;
     color: #000;
+  }
+
+  @media (min-width: 768px){
+    #menuIcon{
+        display: none;
+    }
   }
