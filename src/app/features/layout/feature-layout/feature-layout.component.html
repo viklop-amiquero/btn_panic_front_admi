@@ -3,12 +3,12 @@
 <mat-sidenav-container class="layout-container">
     <mat-sidenav
         #sidenav
-        mode="over"
-        opened
+        [mode]="sidenavMode"
+        [opened]="sidenavOpened"
         [fixedInViewport]="true"
         [fixedTopGap]="64"
     >
-        <sidenav-feature></sidenav-feature>
+        <sidenav-feature (itemSelected)="closeOnMobile()"></sidenav-feature>
     </mat-sidenav>
 
     <mat-sidenav-content>
