@@ -1,4 +1,4 @@
-<toolbar-feature (toggleEmit)="toggleSidenav()"></toolbar-feature>
+<!-- <toolbar-feature (toggleEmit)="toggleSidenav()"></toolbar-feature>
 
 <mat-sidenav-container class="layout-container">
     <mat-sidenav
@@ -6,12 +6,29 @@
         [mode]="sidenavMode"
         [opened]="sidenavOpened"
         [fixedInViewport]="true"
-        [fixedTopGap]="64"
+        [fixedTopGap]="gap"
     >
         <sidenav-feature (itemSelected)="closeOnMobile()"></sidenav-feature>
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <mat-sidenav-content [ngStyle]="{ 'padding-top.px': gap }">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+<!-- layout.component.html -->
+<toolbar-feature
+    class="toolbar"
+    (toggleEmit)="toggleSidenav()"
+></toolbar-feature>
+
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav class="sidenav" [mode]="sidenavMode" opened>
+        <sidenav-feature (itemSelected)="closeOnMobile()"></sidenav-feature>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="content">
+        <!-- Aquí va tu contenido que puede tener scroll -->
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

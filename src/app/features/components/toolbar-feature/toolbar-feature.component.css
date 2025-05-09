@@ -17,6 +17,7 @@
     width: 40px;
     height: auto;
   }
+
 @media (min-width: 768px) {
     .logo{
         width: 48px;
@@ -30,11 +31,10 @@
   @media (min-width: 768px) {
     .app-name{
         font-size: 1.6rem;
-
     }
   }
 
-  @media (min-width: 600px){
+  @media (min-width: 959px){
     #menuIcon{
         display: none;
     }

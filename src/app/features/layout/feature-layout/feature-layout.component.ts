@@ -10,7 +10,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 export class FeatureLayoutComponent implements OnInit {
     @ViewChild('sidenav') sidenav!: MatSidenav
 
-    sidenavMode: 'side' | 'over' = 'side'
+    sidenavMode: 'side' | 'over' = 'over'
     sidenavOpened = true
 
     constructor(private breakpointObserver: BreakpointObserver) {}
@@ -18,10 +18,15 @@ export class FeatureLayoutComponent implements OnInit {
     ngOnInit(): void {
         this.breakpointObserver
             .observe([Breakpoints.Handset])
-            .subscribe((result) => {
-                const isMobile = result.matches
+            .subscribe((state) => {
+                const isMobile = state.matches
+
                 this.sidenavMode = isMobile ? 'over' : 'side'
                 this.sidenavOpened = !isMobile
+
+                if (!isMobile) {
+                    this.sidenav.open()
+                }
             })
     }
 
