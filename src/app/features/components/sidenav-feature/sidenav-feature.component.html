@@ -1,9 +1,31 @@
-<!-- <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" opened>Sidenav content</mat-sidenav>
-    <mat-sidenav-content>Main content</mat-sidenav-content>
-</mat-sidenav-container> -->
-<!-- Solo el contenido del menú -->
 <mat-nav-list>
-    <a mat-list-item routerLink="/perfil">Perfil</a>
-    <a mat-list-item routerLink="/contactos">Contactos</a>
+    <!-- Menú: Dashboard -->
+
+    <div class="btn-arrow" (click)="toggleMenu('dashboard')">
+        <div class="cotenedor-menu">
+            <div class="menu-main">
+                <mat-icon class="menu-icon">dashboard</mat-icon>
+
+                <!-- <a mat-list-item class="menu- toggle"> -->
+                <span class="menu-title">Dashboard</span>
+                <span class="spacer"></span>
+                <!-- </a> -->
+            </div>
+
+            <!-- <button class="btn-arrow"> -->
+            <mat-icon>{{
+                openMenu === 'dashboard' ? 'expand_less' : 'expand_more'
+            }}</mat-icon>
+            <!-- </button> -->
+        </div>
+
+        <div
+            class="submenu"
+            [class.open]="openMenu === 'dashboard'"
+            *ngIf="openMenu === 'dashboard'"
+        >
+            <a mat-list-item routerLink="/dashboard/overview">Resumen</a>
+            <a mat-list-item routerLink="/dashboard/stats">Estadísticas</a>
+        </div>
+    </div>
 </mat-nav-list>

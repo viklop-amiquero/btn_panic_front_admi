@@ -1,0 +1,60 @@
+.cotenedor-menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    padding-top: 10px;
+}
+.menu-main{
+    display: flex;
+    align-items: center;
+}
+
+.btn-arrow {
+  /* all: unset; */
+  cursor: pointer;
+}
+
+.menu-title {
+    padding: 0 10px;
+}
+
+.submenu a {
+  padding-left: 48px;
+  font-size: 14px;
+}
+
+/* .submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1s ease-in-out, opacity 1s ease-in-out;
+  opacity: 0;
+}
+
+.submenu.open {
+  max-height: 500px;
+  opacity: 1;
+} */
+
+
+/* .menu-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.menu-icon {
+  margin-right: 8px;
+}
+
+.menu-title {
+  flex-grow: 1;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.submenu a {
+  padding-left: 48px;
+  font-size: 14px;
+} */
