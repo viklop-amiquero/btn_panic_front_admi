@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { MenuService } from '../../services/menu/menu.service'
-import { MenuDto } from '../../models/dtos/menu-list.dto'
+import { MenuVm } from '../../models/vm/menu.vm'
+import { mapMenuDtoToVmList } from '../../models/vm/menu.mapper'
 
 @Component({
     selector: 'sidenav-feature',
@@ -9,28 +10,47 @@ import { MenuDto } from '../../models/dtos/menu-list.dto'
     styleUrl: './sidenav-feature.component.css',
 })
 export class SidenavFeatureComponent implements OnInit {
-    public menuList: MenuDto[] = []
-    public openMenu: number | null = null
+    menuList: MenuVm[] = []
+    openMenus: Set<number> = new Set()
 
     constructor(private _menuService: MenuService) {}
 
     ngOnInit() {
         this.getMenu()
-        this.formaterMenu()
-    }
-
-    formaterMenu() {
-        let list_menu = this.menuList.filter((menu) => menu.nivel === '2')
-        console.log(list_menu)
     }
 
     getMenu() {
         this._menuService.getMenu().subscribe((response) => {
-            this.menuList = response.data // <- extraes el array
+            this.menuList = mapMenuDtoToVmList(response.data)
         })
     }
 
-    toggleMenu(menuId: number) {
-        this.openMenu = this.openMenu === menuId ? null : menuId
+    toggleMenu(id: number): void {
+        if (!this.openMenus.has(id)) {
+            this.openMenus.add(id)
+            return
+        }
+        this.openMenus.delete(id)
     }
+
+    isMenuOpen(id: number): boolean {
+        return this.openMenus.has(id)
+    }
+    // menuList: MenuVm[] = []
+    // openMenuId: number | null = null
+    // constructor(private _menuService: MenuService) {}
+
+    // ngOnInit() {
+    //     this.getMenu()
+    // }
+
+    // getMenu() {
+    //     this._menuService.getMenu().subscribe((response) => {
+    //         this.menuList = mapMenuDtoToVmList(response.data)
+    //     })
+    // }
+
+    // toggleMenu(id: number): void {
+    //     this.openMenuId = this.openMenuId === id ? null : id
+    // }
 }
