@@ -1,22 +1,17 @@
-<mat-nav-list>
-    <!-- Menú: Dashboard -->
+<!-- <mat-nav-list>
 
     <div class="btn-arrow" (click)="toggleMenu('dashboard')">
         <div class="cotenedor-menu">
             <div class="menu-main">
-                <mat-icon class="menu-icon">dashboard</mat-icon>
+                <mat-icon class="menu-icon">{{ menu.icono }}</mat-icon>
 
-                <!-- <a mat-list-item class="menu- toggle"> -->
-                <span class="menu-title">Dashboard</span>
+                <span class="menu-title">{{ menu.nombre }}</span>
                 <span class="spacer"></span>
-                <!-- </a> -->
             </div>
 
-            <!-- <button class="btn-arrow"> -->
             <mat-icon>{{
                 openMenu === 'dashboard' ? 'expand_less' : 'expand_more'
             }}</mat-icon>
-            <!-- </button> -->
         </div>
 
         <div
@@ -24,8 +19,39 @@
             [class.open]="openMenu === 'dashboard'"
             *ngIf="openMenu === 'dashboard'"
         >
-            <a mat-list-item routerLink="/dashboard/overview">Resumen</a>
+            <a mat-list-item [routerLink]="">Resumen</a>
             <a mat-list-item routerLink="/dashboard/stats">Estadísticas</a>
         </div>
     </div>
+</mat-nav-list> -->
+
+<mat-nav-list>
+    <ng-container *ngFor="let menu of menuList">
+        <ng-container>
+            <div class="btn-arrow" (click)="toggleMenu(menu.id)">
+                <div class="cotenedor-menu">
+                    <div class="menu-main">
+                        <mat-icon class="menu-icon">{{ menu.icono }}</mat-icon>
+                        <span class="menu-title">{{ menu.nombre }}</span>
+                        <span class="spacer"></span>
+                    </div>
+                    <mat-icon>
+                        {{
+                            openMenu === menu.id ? 'expand_less' : 'expand_more'
+                        }}
+                    </mat-icon>
+                </div>
+
+                <div
+                    class="submenu"
+                    [class.open]="openMenu === menu.id"
+                    *ngIf="menu.nivel === '2'"
+                >
+                    <a mat-list-item>
+                        {{ menu.nombre }}
+                    </a>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
 </mat-nav-list>

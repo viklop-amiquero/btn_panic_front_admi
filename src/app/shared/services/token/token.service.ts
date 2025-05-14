@@ -6,9 +6,7 @@ import { Injectable } from '@angular/core'
 export class TokenService {
     constructor() {}
 
-    getToken() {
-        if (!localStorage.getItem('authToken')) return
-        const value = localStorage.getItem('authToken')
-        return value
+    getToken(): string {
+        return localStorage.getItem('authToken') || ''
     }
 }
