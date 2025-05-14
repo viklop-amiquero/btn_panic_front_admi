@@ -1,0 +1,79 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  gap: 0.75rem;
+}
+
+.page-header .left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.page-header .breadcrumbs {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #666666;
+  flex-wrap: wrap;
+}
+
+.page-header .breadcrumbs .breadcrumb {
+  margin-right: 0.25rem;
+}
+
+.page-header .breadcrumbs mat-icon {
+  font-size: 16px;
+  margin: 0 0.25rem;
+}
+
+.page-header .title {
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.page-header .action-button {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  font-weight: 600;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.page-header .action-button .icon {
+  margin-right: 0.5rem;
+}
+
+/* Medium & up: make it row layout (tablet, desktop) */
+@media (min-width: 768px) {
+  .page-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .page-header .left {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .page-header .title {
+    font-size: 1.5rem;
+  }
+}
+
+.page-header .breadcrumbs mat-icon {
+  font-size: 16px;
+  vertical-align: middle;
+  margin: 0 0.25rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

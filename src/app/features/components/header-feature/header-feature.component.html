@@ -1,0 +1,21 @@
+<div class="page-header">
+    <div class="left">
+        <nav class="breadcrumbs" *ngIf="breadcrumbs.length">
+            <ng-container *ngFor="let item of breadcrumbs; let last = last">
+                <span class="breadcrumb">{{ item }}</span>
+                <mat-icon *ngIf="!last">chevron_right</mat-icon>
+            </ng-container>
+        </nav>
+        <h2 class="title">{{ title }}</h2>
+    </div>
+
+    <button
+        mat-flat-button
+        color="warn"
+        *ngIf="showButton"
+        class="action-button"
+    >
+        <mat-icon *ngIf="buttonIcon" class="icon">{{ buttonIcon }}</mat-icon>
+        {{ buttonLabel }}
+    </button>
+</div>
