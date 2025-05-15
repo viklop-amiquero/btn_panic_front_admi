@@ -4,6 +4,7 @@ import { FeatureLayoutComponent } from './layout/feature-layout/feature-layout.c
 import { RoutesName } from '../shared/routes/routes'
 import { DashboardPageComponent } from './dashboard/pages/dashboard-page/dashboard-page.component'
 import { IndexPageComponent } from './dashboard/pages/index-page/index-page.component'
+import { RolPageComponent } from './seguridad/rol/pages/rol-page/rol-page.component'
 
 const routes: Routes = [
     {
@@ -17,6 +18,10 @@ const routes: Routes = [
             {
                 path: RoutesName.DASHBOARD.route,
                 component: DashboardPageComponent,
+            },
+            {
+                path: RoutesName.ROL.route,
+                component: RolPageComponent,
             },
             {
                 path: '**',

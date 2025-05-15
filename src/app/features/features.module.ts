@@ -8,7 +8,9 @@ import { FeatureLayoutComponent } from './layout/feature-layout/feature-layout.c
 import { SharedModule } from '../shared/shared.module'
 import { SidenavFeatureComponent } from './components/sidenav-feature/sidenav-feature.component'
 import { ToolbarFeatureComponent } from './components/toolbar-feature/toolbar-feature.component';
-import { HeaderFeatureComponent } from './components/header-feature/header-feature.component'
+import { HeaderFeatureComponent } from './components/header-feature/header-feature.component';
+import { RolPageComponent } from './seguridad/rol/pages/rol-page/rol-page.component';
+import { RolTableComponent } from './seguridad/rol/components/rol-table/rol-table.component'
 
 @NgModule({
     declarations: [
@@ -18,6 +20,8 @@ import { HeaderFeatureComponent } from './components/header-feature/header-featu
         SidenavFeatureComponent,
         ToolbarFeatureComponent,
         HeaderFeatureComponent,
+        RolPageComponent,
+        RolTableComponent,
     ],
     imports: [CommonModule, FeaturesRoutingModule, SharedModule],
 })

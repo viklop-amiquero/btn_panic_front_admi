@@ -4,4 +4,5 @@ export const RoutesName = {
     INDEX: { route: '', name: 'Inicio', icon: 'home-outline' },
     DASHBOARD: { route: 'dashboard', name: 'Inicio', icon: 'home-outline' },
     PROFILE: { route: 'profile', name: 'Mi cuenta', icon: 'person-outline' },
+    ROL: { route: 'rol', name: '', icon: '' },
 }

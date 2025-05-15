@@ -22,18 +22,6 @@ export class AuthService {
         })
     }
 
-    // private get authHeaders(): Observable<HttpHeaders> {
-    //     return from(this.tokenService.loadToken()).pipe(
-    //         map((token) => {
-    //             if (!token) throw new Error('No token available')
-    //             return this.defaultHeaders.set(
-    //                 'Authorization',
-    //                 `Bearer ${token}`
-    //             )
-    //         })
-    //     )
-    // }
-
     login(data: AuthRequest): Observable<AuthResponse> {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',
