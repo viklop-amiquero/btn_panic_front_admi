@@ -20,5 +20,6 @@ import { HeaderFeatureComponent } from './components/header-feature/header-featu
         HeaderFeatureComponent,
     ],
     imports: [CommonModule, FeaturesRoutingModule, SharedModule],
+    exports: [HeaderFeatureComponent],
 })
 export class FeaturesModule {}
