@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core'
-import { environment } from '../../../../../environments/environment'
 import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
 import { TokenService } from '../../../../shared/services/token/token.service'
-import { HeaderTokenService } from '../../../services/header/header-token.service'
-
+import { environment } from '../../../../../environments/environment'
+import { HeaderHttpService } from '../../../services/headerHttp/header-http.service'
 @Injectable({
     providedIn: 'root',
 })
@@ -13,8 +12,6 @@ export class RolService {
     constructor(
         private _http: HttpClient,
         private _tokenService: TokenService,
-        private _headerTokenService: HeaderTokenService
+        private _headerHttp: HeaderHttpService
     ) {}
-
-    createRol() {}
 }

@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core'
 import { HttpHeaders } from '@angular/common/http'
+import { Injectable } from '@angular/core'
 
 @Injectable({
     providedIn: 'root',
 })
-export class HeaderTokenService {
+export class HeaderHttpService {
     constructor() {}
 
     get defaultHeaders(): HttpHeaders {
