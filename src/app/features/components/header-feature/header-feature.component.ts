@@ -19,4 +19,5 @@ export class HeaderFeatureComponent {
         | 'orange' = 'primary'
     @Input() buttonIcon?: string
     @Input() showButton = false
+    @Input() link = ''
 }

@@ -9,13 +9,14 @@
         <h2 class="title">{{ title }}</h2>
     </div>
 
-    <button
+    <a
         mat-flat-button
+        [routerLink]="link"
         color="warn"
         *ngIf="showButton"
         class="action-button"
     >
         <mat-icon *ngIf="buttonIcon" class="icon">{{ buttonIcon }}</mat-icon>
         {{ buttonLabel }}
-    </button>
+    </a>
 </div>
