@@ -20,7 +20,7 @@ const routes: Routes = [
     },
     {
         path: '**',
-        redirectTo: rn.ROL.index.route,
+        redirectTo: `/${rn.ROL.index.route}`,
     },
 ]
 
