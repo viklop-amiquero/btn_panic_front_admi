@@ -6,3 +6,36 @@
     buttonIcon="add"
     buttonColor="warn"
 />
+<!--
+<form [formGroup]="rolForm" (ngSubmit)="onSubmit()" class="form-container">
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Nombre del rol</mat-label>
+        <input matInput formControlName="nombre" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput rows="3" formControlName="descripcion"></textarea>
+    </mat-form-field>
+
+    <div *ngFor="let permiso of permisosList" class="permiso-group">
+        <h4>{{ permiso }}</h4>
+        <mat-radio-group [formControlName]="permiso">
+            <mat-radio-button
+                *ngFor="let opcion of opcionesPermiso"
+                [value]="opcion"
+            >
+                {{ opcion }}
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="rolForm.invalid"
+    >
+        Guardar Rol
+    </button>
+</form> -->

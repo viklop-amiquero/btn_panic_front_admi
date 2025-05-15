@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild } from '@angular/core'
 import { RolService } from '../../services/rol.service'
+import { MatPaginator } from '@angular/material/paginator'
 import { RoleMenuMapper } from '../../models/vm/RoleMenu.mapper'
 import { RoleMenuViewModel } from '../../models/vm/role-menu-view-model.vm'
 
@@ -23,6 +24,11 @@ export class RolListTableComponent implements OnInit {
     getRolMenu() {
         this._roleService.getRolMenu().subscribe(({ data }) => {
             this.viewModel = RoleMenuMapper(data)
+            // this.rolMenuList = data
+            // console.log(data)
+            // const viewModel = RoleMenuMapper(data)
+            // console.log(viewModel)
+            // this.dataSource = new MatTableDataSource<RoleMenu>(data)
         })
     }
 }
