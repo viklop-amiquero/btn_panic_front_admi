@@ -7,6 +7,7 @@ import { CreateRolPageComponent } from './pages/create-rol-page/create-rol-page.
 import { EditRolPageComponent } from './pages/edit-rol-page/edit-rol-page.component'
 import { RolListTableComponent } from './components/rol-list-table/rol-list-table.component'
 import { FeaturesModule } from '../../features.module'
+import { SharedModule } from '../../../shared/shared.module'
 
 @NgModule({
     declarations: [
@@ -15,6 +16,6 @@ import { FeaturesModule } from '../../features.module'
         EditRolPageComponent,
         RolListTableComponent,
     ],
-    imports: [CommonModule, RolRoutingModule, FeaturesModule],
+    imports: [CommonModule, RolRoutingModule, FeaturesModule, SharedModule],
 })
 export class RolModule {}

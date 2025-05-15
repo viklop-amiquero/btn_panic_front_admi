@@ -1,1 +1,42 @@
-<p>rol-list-table works!</p>
+<div class="mat-elevation-z2" *ngFor="let rol of viewModel">
+    <h3>{{ rol.rol }}</h3>
+
+    <table mat-table [dataSource]="rol.permisos" class="mat-elevation-z8">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>No.</th>
+            <td mat-cell *matCellDef="let permiso">{{ permiso.id }}</td>
+        </ng-container>
+
+        <!-- Menú Column -->
+        <ng-container matColumnDef="menu">
+            <th mat-header-cell *matHeaderCellDef>Menú</th>
+            <td mat-cell *matCellDef="let permiso">{{ permiso.menu }}</td>
+        </ng-container>
+
+        <!-- Permiso Column -->
+        <ng-container matColumnDef="permiso">
+            <th mat-header-cell *matHeaderCellDef>Permiso</th>
+            <td mat-cell *matCellDef="let permiso">{{ permiso.permiso }}</td>
+        </ng-container>
+
+        <!-- Acciones Column -->
+        <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let permiso">
+                <button mat-icon-button color="primary" aria-label="Editar">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr
+            mat-header-row
+            *matHeaderRowDef="['id', 'menu', 'permiso', 'acciones']"
+        ></tr>
+        <tr
+            mat-row
+            *matRowDef="let row; columns: ['id', 'menu', 'permiso', 'acciones']"
+        ></tr>
+    </table>
+</div>
