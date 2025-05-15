@@ -11,7 +11,7 @@ import { RoleMenuViewModel } from '../../models/vm/role-menu-view-model.vm'
     styleUrl: './rol-list-table.component.css',
 })
 export class RolListTableComponent implements OnInit {
-    displayedColumns: string[] = ['id', 'rol', 'menu', 'permiso', 'acciones']
+    displayedColumns: string[] = ['id', 'rol', 'menu', 'permiso']
 
     viewModel: RoleMenuViewModel[] = []
 
