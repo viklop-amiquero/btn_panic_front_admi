@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { RoutesName } from '../../../../../shared/routes/routes'
 import { HeaderLayoutService } from '../../../../services/headerLayout/header-layout.service'
+import { PermisoService } from '../../../../services/permiso/permiso.service'
 
 @Component({
     selector: 'app-create-rol-page',
@@ -11,7 +12,10 @@ import { HeaderLayoutService } from '../../../../services/headerLayout/header-la
 export class CreateRolPageComponent implements OnInit {
     rn = RoutesName
 
-    constructor(private _headerLayoutService: HeaderLayoutService) {}
+    constructor(
+        private _headerLayoutService: HeaderLayoutService,
+        private _permisoService: PermisoService
+    ) {}
 
     ngOnInit(): void {
         this._headerLayoutService.setHeader({
@@ -21,6 +25,14 @@ export class CreateRolPageComponent implements OnInit {
             ],
             title: 'Roles',
             showButton: false,
+        })
+
+        this.getPermiso()
+    }
+
+    getPermiso() {
+        this._permisoService.getPermiso().subscribe((resp) => {
+            console.log(resp.data)
         })
     }
 }
