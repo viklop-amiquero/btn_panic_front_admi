@@ -5,11 +5,6 @@
                 <a [routerLink]="item.link" class="enlace">{{ item.label }}</a>
                 <mat-icon *ngIf="!last">chevron_right</mat-icon>
             </ng-container>
-
-            <!-- <ng-container *ngFor="let item of breadcrumbs; let last = last">
-                <a [routerLink]="hrf" class="enlace">{{ item }}</a>
-                <mat-icon *ngIf="!last">chevron_right</mat-icon>
-            </ng-container> -->
         </nav>
         <h2 class="title">{{ title }}</h2>
     </div>
