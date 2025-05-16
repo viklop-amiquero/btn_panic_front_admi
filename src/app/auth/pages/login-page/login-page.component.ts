@@ -88,7 +88,7 @@ export class LoginPageComponent implements OnInit {
                 this.loginForm.reset()
 
                 // Redirigir a home
-                this._snackBarService.success('login exitoso', 3000)
+                // this._snackBarService.success('login exitoso', 3000)
                 this._router.navigate([RoutesName.INDEX.route])
                 // this._router.navigate([RoutesName.INDEX.route])
             },
