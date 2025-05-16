@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { HeaderLayoutService } from '../../services/headerLayout/header-layout.service'
 import { HeaderLayoutConfig } from '../../models/interfaces/header-layout-config'
@@ -22,12 +22,16 @@ export class HeaderLayoutComponent implements OnInit, OnDestroy {
 
     private sub!: Subscription
 
-    constructor(private _headerLayoutService: HeaderLayoutService) {}
+    constructor(
+        private _headerLayoutService: HeaderLayoutService,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     ngOnInit() {
         this.sub = this._headerLayoutService.hLayoutConfig.subscribe(
             (config) => {
                 this.config = config
+                this._cdr.detectChanges()
             }
         )
     }

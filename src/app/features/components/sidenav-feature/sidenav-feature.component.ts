@@ -36,21 +36,4 @@ export class SidenavFeatureComponent implements OnInit {
     isMenuOpen(id: number): boolean {
         return this.openMenus.has(id)
     }
-    // menuList: MenuVm[] = []
-    // openMenuId: number | null = null
-    // constructor(private _menuService: MenuService) {}
-
-    // ngOnInit() {
-    //     this.getMenu()
-    // }
-
-    // getMenu() {
-    //     this._menuService.getMenu().subscribe((response) => {
-    //         this.menuList = mapMenuDtoToVmList(response.data)
-    //     })
-    // }
-
-    // toggleMenu(id: number): void {
-    //     this.openMenuId = this.openMenuId === id ? null : id
-    // }
 }

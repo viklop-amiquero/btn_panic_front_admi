@@ -24,7 +24,7 @@ export class FeatureLayoutComponent implements OnInit {
                 this.sidenavMode = isMobile ? 'over' : 'side'
                 this.sidenavOpened = !isMobile
 
-                if (!isMobile) {
+                if (!isMobile && this.sidenav) {
                     this.sidenav.open()
                 }
             })
