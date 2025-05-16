@@ -77,3 +77,8 @@
   align-items: center;
   justify-content: center;
 }
+
+.enlace{
+    text-decoration: none;
+    color: #666666;
+}

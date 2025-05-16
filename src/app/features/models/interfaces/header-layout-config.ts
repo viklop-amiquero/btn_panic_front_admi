@@ -1,5 +1,10 @@
+interface Breadcrumb {
+    label: string
+    link: string
+}
+
 export interface HeaderLayoutConfig {
-    breadcrumbs: string[]
+    breadcrumbs: Breadcrumb[]
     title: string
     showButton: boolean
     buttonLabel?: string

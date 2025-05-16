@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core'
     styleUrl: './header-feature.component.css',
 })
 export class HeaderFeatureComponent {
-    @Input() breadcrumbs: string[] = []
+    @Input() breadcrumbs: { label: string; link: string }[] = []
     @Input() title = ''
     @Input() buttonLabel = ''
     @Input() buttonColor:

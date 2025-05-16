@@ -14,7 +14,10 @@ export class IndexRolPageComponent implements OnInit {
 
     ngOnInit(): void {
         this._headerLayoutService.setHeader({
-            breadcrumbs: ['roles', 'lista'],
+            breadcrumbs: [
+                { label: 'Rol', link: `${this.rn.ROL.index.route}` },
+                { label: 'Lista', link: `${this.rn.ROL.index.route}` },
+            ],
             title: 'Roles',
             showButton: true,
             buttonLabel: 'Nuevo Rol',
