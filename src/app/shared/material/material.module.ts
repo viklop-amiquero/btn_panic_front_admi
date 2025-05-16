@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list'
+import { MatRadioModule } from '@angular/material/radio'
 @NgModule({
     exports: [
         MatTableModule,
@@ -21,6 +22,7 @@ import { MatListModule } from '@angular/material/list'
         MatSnackBarModule,
         MatSidenavModule,
         MatListModule,
+        MatRadioModule,
     ],
 })
 export class MaterialModule {}
