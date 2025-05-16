@@ -1,0 +1,13 @@
+<header-feature
+    [breadcrumbs]="config.breadcrumbs"
+    [title]="config.title"
+    [showButton]="config.showButton"
+    [buttonLabel]="config.buttonLabel || ''"
+    [buttonIcon]="config.buttonIcon"
+    [buttonColor]="config.buttonColor || 'primary'"
+    [link]="config.link || ''"
+/>
+
+<div class="content">
+    <router-outlet></router-outlet>
+</div>

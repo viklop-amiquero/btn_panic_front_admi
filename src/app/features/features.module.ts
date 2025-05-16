@@ -8,7 +8,8 @@ import { FeatureLayoutComponent } from './layout/feature-layout/feature-layout.c
 import { SharedModule } from '../shared/shared.module'
 import { SidenavFeatureComponent } from './components/sidenav-feature/sidenav-feature.component'
 import { ToolbarFeatureComponent } from './components/toolbar-feature/toolbar-feature.component'
-import { HeaderFeatureComponent } from './components/header-feature/header-feature.component'
+import { HeaderFeatureComponent } from './components/header-feature/header-feature.component';
+import { HeaderLayoutComponent } from './layout/header-layout/header-layout.component'
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { HeaderFeatureComponent } from './components/header-feature/header-featu
         SidenavFeatureComponent,
         ToolbarFeatureComponent,
         HeaderFeatureComponent,
+        HeaderLayoutComponent,
     ],
     imports: [CommonModule, FeaturesRoutingModule, SharedModule],
     exports: [HeaderFeatureComponent],

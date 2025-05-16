@@ -4,6 +4,7 @@ import { FeatureLayoutComponent } from './layout/feature-layout/feature-layout.c
 import { RoutesName as rn } from '../shared/routes/routes'
 import { DashboardPageComponent } from './dashboard/pages/dashboard-page/dashboard-page.component'
 import { IndexPageComponent } from './dashboard/pages/index-page/index-page.component'
+import { HeaderLayoutComponent } from './layout/header-layout/header-layout.component'
 
 const routes: Routes = [
     {
@@ -20,10 +21,16 @@ const routes: Routes = [
             },
             {
                 path: rn.ROL.index.route,
-                loadChildren: () =>
-                    import('./seguridad/rol/rol.module').then(
-                        (m) => m.RolModule
-                    ),
+                component: HeaderLayoutComponent,
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () =>
+                            import('./seguridad/rol/rol.module').then(
+                                (m) => m.RolModule
+                            ),
+                    },
+                ],
             },
             {
                 path: '**',
