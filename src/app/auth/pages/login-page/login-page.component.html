@@ -1,6 +1,6 @@
 <p class="titulo">Iniciar Sesión</p>
 
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>Usuario</mat-label>
         <input
@@ -38,7 +38,7 @@
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="loginForm.invalid"
+        [disabled]="form.invalid"
     >
         Iniciar sesión
     </button>

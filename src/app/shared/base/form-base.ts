@@ -17,6 +17,11 @@ export abstract class FormBaseComponent {
         this.celularPattern = validatorService.celularPattern
     }
 
+    getCurrentCredentials() {
+        const data = this.form.value
+        return data
+    }
+
     isInvalidField(field: string): boolean | null {
         return this.validatorService.isInvalidField(this.form, field)
     }
