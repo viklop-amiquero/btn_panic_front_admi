@@ -5,6 +5,8 @@ import { environment } from '../../../../../environments/environment'
 import { HeaderHttpService } from '../../../services/headerHttp/header-http.service'
 import { Observable, catchError, throwError } from 'rxjs'
 import { RoleMenuListDto } from '../models/dtos/role-menu-list.dto'
+import { RolCreateRequest } from '../models/requests/rol-create.request'
+import { RolCreateResponse } from '../models/responses/rol-create.response'
 @Injectable({
     providedIn: 'root',
 })
@@ -29,5 +31,17 @@ export class RolService {
                     return throwError(() => error)
                 })
             )
+    }
+
+    createRol(data: RolCreateRequest): Observable<RolCreateResponse> {
+        return this._http.post<RolCreateResponse>(
+            `${this._apiUrl}/api/rol`,
+            data,
+            {
+                headers: this._headerHttpService.getHeaders(
+                    this._tokenService.getToken()
+                ),
+            }
+        )
     }
 }

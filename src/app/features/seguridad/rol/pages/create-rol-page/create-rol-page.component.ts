@@ -2,13 +2,18 @@ import { Component, OnInit } from '@angular/core'
 import { RoutesName } from '../../../../../shared/routes/routes'
 import { HeaderLayoutService } from '../../../../services/headerLayout/header-layout.service'
 import { PermisoService } from '../../../../services/permiso/permiso.service'
-import { FormBuilder, Validators } from '@angular/forms'
+import { Validators, FormBuilder } from '@angular/forms'
 import { PermisoDto } from '../../../../models/dtos/permiso-list.dto'
 import { ValidatorsService } from '../../../../../shared/services/validators/validators.service'
 import { MenuService } from '../../../../services/menu/menu.service'
 import { MenuVm } from '../../../../models/vm/menu.vm'
 import { mapMenuDtoToVmList } from '../../../../models/vm/menu.mapper'
 import { FormBaseComponent } from '../../../../../shared/base/form-base'
+import { forkJoin } from 'rxjs'
+import { transformRolFormValue } from '../../../../../shared/helpers/transform-rol-form-value'
+import { RolService } from '../../services/rol.service'
+import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
+import { Router } from '@angular/router'
 
 @Component({
     selector: 'app-create-rol-page',
@@ -30,15 +35,24 @@ export class CreateRolPageComponent
         private _headerLayoutService: HeaderLayoutService,
         private _validatorService: ValidatorsService,
         private _permisoService: PermisoService,
-        private _menuService: MenuService
+        private _menuService: MenuService,
+        private _rolService: RolService,
+        private _snackbarService: SnackbarService,
+        private _router: Router
     ) {
         super(_validatorService)
     }
-    // public rolForm!: FormGroup
 
     ngOnInit(): void {
-        this.getMenu()
-        this.getPermiso()
+        forkJoin({
+            permisos: this._permisoService.getPermiso(),
+            menus: this._menuService.getMenu(),
+        }).subscribe(({ permisos, menus }) => {
+            this.permisoList = permisos.data
+            this.menuList = mapMenuDtoToVmList(menus.data)
+
+            this.buildForm()
+        })
 
         this._headerLayoutService.setHeader({
             breadcrumbs: [
@@ -48,7 +62,9 @@ export class CreateRolPageComponent
             title: 'Roles',
             showButton: false,
         })
+    }
 
+    buildForm() {
         this.form = this._fb.group({
             nombre: [
                 '',
@@ -56,23 +72,41 @@ export class CreateRolPageComponent
             ],
             descripcion: ['', Validators.required],
         })
+
+        this.menuList.forEach((menu) => {
+            if (menu.children.length === 0) {
+                this.form.addControl(
+                    `menu_${menu.id}`,
+                    this._fb.control('', Validators.required)
+                )
+            } else {
+                menu.children.forEach((child) => {
+                    this.form.addControl(
+                        `menu_${child.id}`,
+                        this._fb.control('', Validators.required)
+                    )
+                })
+            }
+        })
     }
 
     onSubmit(): void {
         this.onSubmitForm(this.form, () => {
-            // lógica del submit si el form es válido
-        })
-    }
+            const request = transformRolFormValue(this.getCurrentCredentials())
 
-    getPermiso() {
-        this._permisoService.getPermiso().subscribe(({ data }) => {
-            this.permisoList = data
-        })
-    }
+            this._rolService.createRol(request).subscribe({
+                next: ({ message }) => {
+                    this._snackbarService.success(`${message}`)
 
-    getMenu() {
-        this._menuService.getMenu().subscribe(({ data }) => {
-            this.menuList = mapMenuDtoToVmList(data)
+                    this.form.reset()
+                    this._router.navigate([RoutesName.ROL.index.route])
+                },
+                error: (err) => {
+                    this._snackbarService.error(
+                        'Ocurió un error, por favor inténtelo más tarde'
+                    )
+                },
+            })
         })
     }
 }

@@ -15,13 +15,6 @@ export class AuthService {
     private readonly _apiUrl: string = environment.apiUrl
     constructor() {}
 
-    private get defaultHeaders(): HttpHeaders {
-        return new HttpHeaders({
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-        })
-    }
-
     login(data: AuthRequest): Observable<AuthResponse> {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',

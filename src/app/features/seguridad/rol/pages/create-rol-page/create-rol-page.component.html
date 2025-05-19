@@ -42,6 +42,7 @@
                     <mat-radio-group
                         class="radio-row"
                         name="permiso-{{ menu.nombre }}"
+                        [formControlName]="'menu_' + menu.id"
                     >
                         <mat-radio-button
                             *ngFor="let permiso of permisoList"
@@ -52,6 +53,22 @@
                     </mat-radio-group>
                 </ng-container>
             </fieldset>
+            <!-- <fieldset>
+                <ng-container *ngIf="menu.children.length === 0">
+                    <mat-radio-group
+                        class="radio-row"
+                        name="permiso-{{ menu.nombre }}"
+                    >
+                        <mat-radio-button
+                            *ngFor="let permiso of permisoList"
+                            formControlName="menu_{{ menu.id }}"
+                            [value]="permiso.id"
+                        >
+                            {{ permiso.descripcion }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </ng-container>
+            </fieldset> -->
 
             <!-- Si tiene hijos -->
             <ng-container *ngIf="menu.children.length > 0">
@@ -64,6 +81,7 @@
                         <mat-radio-group
                             class="radio-row"
                             name="permiso-{{ subMenu.nombre }}"
+                            [formControlName]="'menu_' + subMenu.id"
                         >
                             <mat-radio-button
                                 *ngFor="let permiso of permisoList"
@@ -75,6 +93,28 @@
                     </div>
                 </fieldset>
             </ng-container>
+            <!-- <ng-container *ngIf="menu.children.length > 0">
+                <fieldset>
+                    <div
+                        class="submenu-container"
+                        *ngFor="let subMenu of menu.children"
+                    >
+                        <h4 class="submenu-title">{{ subMenu.nombre }}</h4>
+                        <mat-radio-group
+                            class="radio-row"
+                            name="permiso-{{ subMenu.nombre }}"
+                        >
+                            <mat-radio-button
+                                formControlName="menu_{{ menu.id }}"
+                                *ngFor="let permiso of permisoList"
+                                [value]="permiso.id"
+                            >
+                                {{ permiso.descripcion }}
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </fieldset>
+            </ng-container> -->
         </div>
     </div>
 
