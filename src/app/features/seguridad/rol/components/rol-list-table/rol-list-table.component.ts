@@ -24,11 +24,6 @@ export class RolListTableComponent implements OnInit {
     getRolMenu() {
         this._roleService.getRolMenu().subscribe(({ data }) => {
             this.viewModel = RoleMenuMapper(data)
-            // this.rolMenuList = data
-            // console.log(data)
-            // const viewModel = RoleMenuMapper(data)
-            // console.log(viewModel)
-            // this.dataSource = new MatTableDataSource<RoleMenu>(data)
         })
     }
 }

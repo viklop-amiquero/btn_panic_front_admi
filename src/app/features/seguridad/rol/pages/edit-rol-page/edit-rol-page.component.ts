@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core'
 
 @Component({
-  selector: 'app-edit-rol-page',
-  standalone: false,
-  templateUrl: './edit-rol-page.component.html',
-  styleUrl: './edit-rol-page.component.css'
+    selector: 'app-edit-rol-page',
+    standalone: false,
+    templateUrl: './edit-rol-page.component.html',
+    styleUrl: './edit-rol-page.component.css',
 })
-export class EditRolPageComponent {
-
-}
+export class EditRolPageComponent {}
