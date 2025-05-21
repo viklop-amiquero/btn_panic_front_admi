@@ -3,10 +3,14 @@
         <h3>
             {{ rol.rol }}
         </h3>
-        <a mat-raised-button color="primary">
+        <button
+            [routerLink]="'/' + r_rol + '/' + r_rolEdit + '/' + rol.id_rol"
+            mat-raised-button
+            color="primary"
+        >
             <mat-icon>edit</mat-icon>
-            Editar {{ rol.id_rol }}
-        </a>
+            Editar
+        </button>
     </div>
 
     <table mat-table [dataSource]="rol.permisos" class="mat-elevation-z8">

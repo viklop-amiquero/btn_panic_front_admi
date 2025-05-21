@@ -15,7 +15,8 @@ const routes: Routes = [
         component: CreateRolPageComponent,
     },
     {
-        path: rn.ROL.edit.route,
+        // path: `${rn.ROL.edit.route}/:id`,
+        path: `${rn.ROL.edit.route}/:id`,
         component: EditRolPageComponent,
     },
     {
