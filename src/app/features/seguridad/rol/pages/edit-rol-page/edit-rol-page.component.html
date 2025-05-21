@@ -1,94 +1,10 @@
-<form
-    *ngIf="form"
-    [formGroup]="form"
-    (ngSubmit)="onSubmit()"
-    class="form-container mat-elevation-z2"
->
-    <h2 class="form-title">Editar rol:</h2>
-
-    <!-- Campos del formulario -->
-    <div class="form-fields">
-        <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Nombre del rol</mat-label>
-            <input matInput formControlName="nombre" />
-            <mat-error *ngIf="isInvalidField('nombre')">
-                {{ getErrorMessage('nombre') }}
-            </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Descripción</mat-label>
-            <textarea
-                matInput
-                rows="3"
-                formControlName="descripcion"
-            ></textarea>
-            <mat-error *ngIf="isInvalidField('descripcion')">
-                {{ getErrorMessage('descripcion') }}
-            </mat-error>
-        </mat-form-field>
-    </div>
-
-    <!-- Sección de permisos -->
-    <div class="permisos-section">
-        <h2 class="section-title">Asignar permisos</h2>
-
-        <div *ngFor="let menu of menuList" class="menu-group">
-            <h3 class="menu-title">{{ menu.nombre }}</h3>
-
-            <!-- Si no tiene hijos -->
-            <fieldset>
-                <ng-container *ngIf="menu.children.length === 0">
-                    <mat-radio-group
-                        class="radio-row"
-                        name="permiso-{{ menu.nombre }}"
-                        [formControlName]="'menu_' + menu.id"
-                    >
-                        <mat-radio-button
-                            *ngFor="let permiso of permisoList"
-                            [value]="permiso.id"
-                        >
-                            {{ permiso.descripcion }}
-                        </mat-radio-button>
-                    </mat-radio-group>
-                </ng-container>
-            </fieldset>
-
-            <!-- Si tiene hijos -->
-            <ng-container *ngIf="menu.children.length > 0">
-                <fieldset>
-                    <div
-                        class="submenu-container"
-                        *ngFor="let subMenu of menu.children"
-                    >
-                        <h4 class="submenu-title">{{ subMenu.nombre }}</h4>
-                        <mat-radio-group
-                            class="radio-row"
-                            name="permiso-{{ subMenu.nombre }}"
-                            [formControlName]="'menu_' + subMenu.id"
-                        >
-                            <mat-radio-button
-                                *ngFor="let permiso of permisoList"
-                                [value]="permiso.id"
-                            >
-                                {{ permiso.descripcion }}
-                            </mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                </fieldset>
-            </ng-container>
-        </div>
-    </div>
-
-    <div class="form-actions">
-        <button
-            mat-flat-button
-            color="primary"
-            type="submit"
-            [disabled]="form.invalid"
-        >
-            <mat-icon>save</mat-icon>
-            Guardar Rol
-        </button>
-    </div>
-</form>
+<rol-form
+    [form]="form"
+    [title]="title"
+    [span]="span"
+    [menuList]="menuList"
+    [permisoList]="permisoList"
+    (submitted)="onSubmit()"
+    [isInvalidField]="isInvalidField.bind(this)"
+    [getErrorMessage]="getErrorMessage.bind(this)"
+></rol-form>

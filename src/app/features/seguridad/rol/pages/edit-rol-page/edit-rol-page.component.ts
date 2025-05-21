@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { HeaderLayoutService } from '../../../../services/headerLayout/header-layout.service'
 import { FormBaseComponent } from '../../../../../shared/base/form-base'
 import { ValidatorsService } from '../../../../../shared/services/validators/validators.service'
-import { FormBuilder, Validators } from '@angular/forms'
+import { FormBuilder } from '@angular/forms'
 import { PermisoDto } from '../../../../models/dtos/permiso-list.dto'
 import { MenuVm } from '../../../../models/vm/menu.vm'
 import { RoutesName } from '../../../../../shared/routes/routes'
@@ -12,9 +12,10 @@ import { mapMenuDtoToVmList } from '../../../../models/vm/menu.mapper'
 import { forkJoin, switchMap, tap } from 'rxjs'
 import { ActivatedRoute, Router } from '@angular/router'
 import { RolService } from '../../services/rol.service'
-import { RoleMenuByIdDto } from '../../models/dtos/role-menu-by-id-list.dto'
 import { mapToRoleMenuCardVm } from '../../models/vm/RoleMenuCard.mapper'
 import { RoleMenuCardVm } from '../../models/vm/role-menu-card.vm'
+import { buildRolForm } from '../../../../../shared/helpers/build-rol-form'
+import { SpanFormRol } from '../../models/interfaces/span-form-rol'
 
 @Component({
     selector: 'app-edit-rol-page',
@@ -23,7 +24,8 @@ import { RoleMenuCardVm } from '../../models/vm/role-menu-card.vm'
     styleUrl: './edit-rol-page.component.css',
 })
 export class EditRolPageComponent extends FormBaseComponent implements OnInit {
-    private _fb: FormBuilder = new FormBuilder()
+    title = 'Editar rol :'
+    span!: SpanFormRol
     rolMenu: RoleMenuCardVm[] = []
     permisoList: PermisoDto[] = []
     menuList: MenuVm[] = []
@@ -62,11 +64,19 @@ export class EditRolPageComponent extends FormBaseComponent implements OnInit {
                     if (!data) return this._router.navigate([this.r_rol])
                     this.rolMenu = mapToRoleMenuCardVm(data)
                     this.setFormValues()
+                    this.setSpanValues()
                     return
                 })
             )
             .subscribe()
+        this.setHeaderLayoutService()
+    }
 
+    setSpanValues(): void {
+        this.span = { title: this.rolMenu[0].rol_name, show: true }
+    }
+
+    setHeaderLayoutService(): void {
         this._headerLayoutService.setHeader({
             breadcrumbs: [
                 { label: 'Rol', link: `${this.r_rol}` },
@@ -95,60 +105,8 @@ export class EditRolPageComponent extends FormBaseComponent implements OnInit {
         })
     }
 
-    // ngOnInit(): void {
-    //     forkJoin({
-    //         permisos: this._permisoService.getPermiso(),
-    //         menus: this._menuService.getMenu(),
-    //     }).subscribe(({ permisos, menus }) => {
-    //         this.permisoList = permisos.data
-    //         this.menuList = mapMenuDtoToVmList(menus.data)
-
-    //         this.buildForm()
-    //     })
-
-    //     this._activateRoute.params
-    //         .pipe(switchMap(({ id }) => this._rolService.getRoleMenuById(id)))
-    //         .subscribe((data) => {
-    //             if (!data) return this._router.navigate([this.r_rol])
-    //             this.rolMenu = mapToRoleMenuCardVm(data)
-    //             console.log(this.rolMenu)
-    //             return
-    //         })
-
-    //     this._headerLayoutService.setHeader({
-    //         breadcrumbs: [
-    //             { label: 'Rol', link: `${this.r_rol}` },
-    //             { label: 'Editar', link: `${this.r_rolEdit}` },
-    //         ],
-    //         title: 'Roles',
-    //         showButton: false,
-    //     })
-    // }
-
-    buildForm() {
-        this.form = this._fb.group({
-            nombre: [
-                '',
-                [Validators.required, Validators.pattern(this.namePattern)],
-            ],
-            descripcion: ['', Validators.required],
-        })
-
-        this.menuList.forEach((menu) => {
-            if (menu.children.length === 0) {
-                this.form.addControl(
-                    `menu_${menu.id}`,
-                    this._fb.control('', Validators.required)
-                )
-            } else {
-                menu.children.forEach((child) => {
-                    this.form.addControl(
-                        `menu_${child.id}`,
-                        this._fb.control('', Validators.required)
-                    )
-                })
-            }
-        })
+    buildForm(): void {
+        this.form = buildRolForm(this.menuList, this.validatorService)
     }
 
     onSubmit(): void {}

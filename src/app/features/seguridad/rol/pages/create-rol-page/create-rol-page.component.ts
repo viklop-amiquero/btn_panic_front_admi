@@ -14,6 +14,7 @@ import { transformRolFormValue } from '../../../../../shared/helpers/transform-r
 import { RolService } from '../../services/rol.service'
 import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
 import { Router } from '@angular/router'
+import { buildRolForm } from '../../../../../shared/helpers/build-rol-form'
 
 @Component({
     selector: 'app-create-rol-page',
@@ -25,7 +26,8 @@ export class CreateRolPageComponent
     extends FormBaseComponent
     implements OnInit
 {
-    private _fb: FormBuilder = new FormBuilder()
+    // private _fb: FormBuilder = new FormBuilder()
+    title = 'Nuevo rol'
     permisoList: PermisoDto[] = []
     menuList: MenuVm[] = []
 
@@ -54,6 +56,10 @@ export class CreateRolPageComponent
             this.buildForm()
         })
 
+        this.setHeaderLayoutService()
+    }
+
+    setHeaderLayoutService(): void {
         this._headerLayoutService.setHeader({
             breadcrumbs: [
                 { label: 'Rol', link: `${this.rn.ROL.index.route}` },
@@ -64,30 +70,8 @@ export class CreateRolPageComponent
         })
     }
 
-    buildForm() {
-        this.form = this._fb.group({
-            nombre: [
-                '',
-                [Validators.required, Validators.pattern(this.namePattern)],
-            ],
-            descripcion: ['', Validators.required],
-        })
-
-        this.menuList.forEach((menu) => {
-            if (menu.children.length === 0) {
-                this.form.addControl(
-                    `menu_${menu.id}`,
-                    this._fb.control('', Validators.required)
-                )
-            } else {
-                menu.children.forEach((child) => {
-                    this.form.addControl(
-                        `menu_${child.id}`,
-                        this._fb.control('', Validators.required)
-                    )
-                })
-            }
-        })
+    buildForm(): void {
+        this.form = buildRolForm(this.menuList, this.validatorService)
     }
 
     onSubmit(): void {
