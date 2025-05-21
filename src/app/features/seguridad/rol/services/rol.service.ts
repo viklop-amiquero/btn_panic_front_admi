@@ -8,6 +8,7 @@ import { RoleMenuListDto } from '../models/dtos/role-menu-list.dto'
 import { RolCreateRequest } from '../models/requests/rol-create.request'
 import { RolCreateResponse } from '../models/responses/rol-create.response'
 import { RoleMenuByIdListdDto } from '../models/dtos/role-menu-by-id-list.dto'
+import { RolUpdateResponse } from '../models/responses/rol-update.response'
 @Injectable({
     providedIn: 'root',
 })
@@ -49,6 +50,21 @@ export class RolService {
     getRoleMenuById(id: number): Observable<RoleMenuByIdListdDto> {
         return this._http.get<RoleMenuByIdListdDto>(
             `${this._apiUrl}/api/rol/${id}`,
+            {
+                headers: this._headerHttpService.getHeaders(
+                    this._tokenService.getToken()
+                ),
+            }
+        )
+    }
+
+    updateRole(
+        id: number,
+        data: RolCreateRequest
+    ): Observable<RolUpdateResponse> {
+        return this._http.put<RolUpdateResponse>(
+            `${this._apiUrl}/api/rol/${id}`,
+            data,
             {
                 headers: this._headerHttpService.getHeaders(
                     this._tokenService.getToken()

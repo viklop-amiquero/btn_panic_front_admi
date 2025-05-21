@@ -2,20 +2,21 @@ import { Component, OnInit } from '@angular/core'
 import { HeaderLayoutService } from '../../../../services/headerLayout/header-layout.service'
 import { FormBaseComponent } from '../../../../../shared/base/form-base'
 import { ValidatorsService } from '../../../../../shared/services/validators/validators.service'
-import { FormBuilder } from '@angular/forms'
 import { PermisoDto } from '../../../../models/dtos/permiso-list.dto'
 import { MenuVm } from '../../../../models/vm/menu.vm'
 import { RoutesName } from '../../../../../shared/routes/routes'
 import { PermisoService } from '../../../../services/permiso/permiso.service'
 import { MenuService } from '../../../../services/menu/menu.service'
 import { mapMenuDtoToVmList } from '../../../../models/vm/menu.mapper'
-import { forkJoin, switchMap, tap } from 'rxjs'
+import { forkJoin, switchMap, tap, catchError, EMPTY } from 'rxjs'
 import { ActivatedRoute, Router } from '@angular/router'
 import { RolService } from '../../services/rol.service'
 import { mapToRoleMenuCardVm } from '../../models/vm/RoleMenuCard.mapper'
 import { RoleMenuCardVm } from '../../models/vm/role-menu-card.vm'
 import { buildRolForm } from '../../../../../shared/helpers/build-rol-form'
 import { SpanFormRol } from '../../models/interfaces/span-form-rol'
+import { transformRolFormValue } from '../../../../../shared/helpers/transform-rol-form-value'
+import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
 
 @Component({
     selector: 'app-edit-rol-page',
@@ -29,7 +30,7 @@ export class EditRolPageComponent extends FormBaseComponent implements OnInit {
     rolMenu: RoleMenuCardVm[] = []
     permisoList: PermisoDto[] = []
     menuList: MenuVm[] = []
-
+    idRol!: number
     r_rol = RoutesName.ROL.index.route
     r_rolEdit = RoutesName.ROL.edit.route
 
@@ -38,6 +39,7 @@ export class EditRolPageComponent extends FormBaseComponent implements OnInit {
         private _validatorService: ValidatorsService,
         private _permisoService: PermisoService,
         private _menuService: MenuService,
+        private _snackbarService: SnackbarService,
         private _activateRoute: ActivatedRoute,
         private _rolService: RolService,
         private _router: Router
@@ -56,19 +58,36 @@ export class EditRolPageComponent extends FormBaseComponent implements OnInit {
                     this.menuList = mapMenuDtoToVmList(menus.data)
                     this.buildForm()
 
-                    const id = this._activateRoute.snapshot.params['id']
+                    // Convertir id a número y validar
+                    this.idRol = Number(
+                        this._activateRoute.snapshot.params['id']
+                    )
+                    if (isNaN(this.idRol)) {
+                        this._router.navigate([this.r_rol])
+                        return EMPTY
+                    }
 
-                    return this._rolService.getRoleMenuById(id)
+                    // Llamar al backend y capturar errores
+                    return this._rolService.getRoleMenuById(this.idRol).pipe(
+                        catchError((err) => {
+                            this._router.navigate([this.r_rol])
+                            return EMPTY
+                        })
+                    )
                 }),
                 tap((data) => {
-                    if (!data) return this._router.navigate([this.r_rol])
+                    if (!data || data.data.length === 0) {
+                        this._router.navigate([this.r_rol])
+                        return
+                    }
+
                     this.rolMenu = mapToRoleMenuCardVm(data)
                     this.setFormValues()
                     this.setSpanValues()
-                    return
                 })
             )
             .subscribe()
+
         this.setHeaderLayoutService()
     }
 
@@ -109,5 +128,24 @@ export class EditRolPageComponent extends FormBaseComponent implements OnInit {
         this.form = buildRolForm(this.menuList, this.validatorService)
     }
 
-    onSubmit(): void {}
+    onSubmit(): void {
+        // console.log(transformRolFormValue(this.getCurrentCredentials()))
+        this.onSubmitForm(this.form, () => {
+            const request = transformRolFormValue(this.getCurrentCredentials())
+
+            this._rolService.updateRole(this.idRol, request).subscribe({
+                next: ({ message }) => {
+                    this._snackbarService.success(`${message}`)
+
+                    this.form.reset()
+                    this._router.navigate([RoutesName.ROL.index.route])
+                },
+                error: (err) => {
+                    this._snackbarService.error(
+                        'Ocurió un error, por favor inténtelo más tarde'
+                    )
+                },
+            })
+        })
+    }
 }
