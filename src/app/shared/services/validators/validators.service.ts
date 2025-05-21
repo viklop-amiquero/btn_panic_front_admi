@@ -68,6 +68,11 @@ export class ValidatorsService {
             return 'Las contraseñas no coinciden.'
         }
 
+        if (control.errors['maxlength']) {
+            const requiredLength = control.errors['maxlength'].requiredLength
+            return `Debe tener como máximo ${requiredLength} caracteres.`
+        }
+
         return 'Campo inválido.'
     }
 }

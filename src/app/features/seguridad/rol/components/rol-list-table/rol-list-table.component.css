@@ -11,8 +11,36 @@ td{
     text-align: center;
 }
 
-.heading{
+/* .heading{
     display: flex;
     justify-content: space-between;
     align-items: center;
+} */
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+
+.descripcion {
+    font-size: 1rem;
+    color: #4a4a4a;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    line-height: 1.5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    white-space: pre-line;
+}
+

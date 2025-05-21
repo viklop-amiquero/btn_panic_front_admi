@@ -29,4 +29,7 @@ export class RolListTableComponent implements OnInit {
             this.viewModel = RoleMenuMapper(data)
         })
     }
+    onDeleteRol() {
+        console.log('Eliminando...')
+    }
 }

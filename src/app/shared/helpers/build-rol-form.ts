@@ -11,7 +11,10 @@ export function buildRolForm(
             Validators.required,
             Validators.pattern(validatorService.namePattern),
         ]),
-        descripcion: new FormControl('', Validators.required),
+        descripcion: new FormControl('', [
+            Validators.required,
+            Validators.maxLength(100),
+        ]),
     }
 
     menuList.forEach((menu) => {

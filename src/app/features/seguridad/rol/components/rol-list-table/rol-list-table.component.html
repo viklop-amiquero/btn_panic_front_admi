@@ -1,5 +1,29 @@
 <div class="mat-elevation-z2" *ngFor="let rol of viewModel">
     <div class="heading">
+        <h3>{{ rol.rol }}</h3>
+
+        <div class="action-buttons">
+            <button
+                [routerLink]="'/' + r_rol + '/' + r_rolEdit + '/' + rol.id_rol"
+                mat-raised-button
+                color="primary"
+            >
+                <mat-icon>edit</mat-icon>
+                Editar
+            </button>
+
+            <button
+                mat-raised-button
+                style="color: #fb2c36"
+                (click)="onDeleteRol()"
+            >
+                <mat-icon>delete</mat-icon>
+                Eliminar
+            </button>
+        </div>
+    </div>
+
+    <!-- <div class="heading">
         <h3>
             {{ rol.rol }}
         </h3>
@@ -11,8 +35,9 @@
             <mat-icon>edit</mat-icon>
             Editar
         </button>
-    </div>
+    </div> -->
 
+    <p class="descripcion">{{ rol.descripcion }}</p>
     <table mat-table [dataSource]="rol.permisos" class="mat-elevation-z8">
         <!-- ID Column -->
         <ng-container matColumnDef="id">

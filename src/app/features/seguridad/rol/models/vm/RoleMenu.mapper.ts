@@ -9,6 +9,7 @@ export function RoleMenuMapper(data: RoleMenu[]): RoleMenuViewModel[] {
             grouped[item.id_rol] = {
                 id_rol: item.id_rol,
                 rol: item.rol,
+                descripcion: item.rol_descripcion,
                 permisos: [],
             }
         }
