@@ -9,6 +9,7 @@ import { RolCreateRequest } from '../models/requests/rol-create.request'
 import { RolCreateResponse } from '../models/responses/rol-create.response'
 import { RoleMenuByIdListdDto } from '../models/dtos/role-menu-by-id-list.dto'
 import { RolUpdateResponse } from '../models/responses/rol-update.response'
+import { RolDeleteResponse } from '../models/responses/rol-delete.response'
 @Injectable({
     providedIn: 'root',
 })
@@ -65,6 +66,17 @@ export class RolService {
         return this._http.put<RolUpdateResponse>(
             `${this._apiUrl}/api/rol/${id}`,
             data,
+            {
+                headers: this._headerHttpService.getHeaders(
+                    this._tokenService.getToken()
+                ),
+            }
+        )
+    }
+
+    deleteRole(id: number): Observable<RolDeleteResponse> {
+        return this._http.delete<RolDeleteResponse>(
+            `${this._apiUrl}/api/rol/${id}`,
             {
                 headers: this._headerHttpService.getHeaders(
                     this._tokenService.getToken()
