@@ -11,12 +11,6 @@ td{
     text-align: center;
 }
 
-/* .heading{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-} */
-
 .heading {
     display: flex;
     justify-content: space-between;
