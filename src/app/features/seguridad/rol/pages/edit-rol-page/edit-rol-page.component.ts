@@ -17,7 +17,6 @@ import { buildRolForm } from '../../../../../shared/helpers/build-rol-form'
 import { SpanFormRol } from '../../models/interfaces/span-form-rol'
 import { transformRolFormValue } from '../../../../../shared/helpers/transform-rol-form-value'
 import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
-import { ParamsUrlService } from '../../../../services/paramsUrl/params-url.service'
 
 @Component({
     selector: 'app-edit-rol-page',
@@ -43,8 +42,7 @@ export class EditRolPageComponent extends FormBaseComponent implements OnInit {
         private _snackbarService: SnackbarService,
         private _activateRoute: ActivatedRoute,
         private _rolService: RolService,
-        private _router: Router,
-        private _paramsUrlService: ParamsUrlService
+        private _router: Router
     ) {
         super(_validatorService)
     }
@@ -60,7 +58,6 @@ export class EditRolPageComponent extends FormBaseComponent implements OnInit {
                     this.menuList = mapMenuDtoToVmList(menus.data)
                     this.buildForm()
 
-                    // Ya no validamos el ID porque el guard lo hace
                     this.idRol = Number(
                         this._activateRoute.snapshot.params['id']
                     )
@@ -120,7 +117,6 @@ export class EditRolPageComponent extends FormBaseComponent implements OnInit {
     }
 
     onSubmit(): void {
-        // console.log(transformRolFormValue(this.getCurrentCredentials()))
         this.onSubmitForm(this.form, () => {
             const request = transformRolFormValue(this.getCurrentCredentials())
 
