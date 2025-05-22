@@ -15,7 +15,7 @@ import { Router } from '@angular/router'
 })
 export class RolListTableComponent implements OnInit {
     displayedColumns: string[] = ['id', 'rol', 'menu', 'permiso']
-    viewModel: RoleMenuViewModel[] = []
+    listRolMenu: RoleMenuViewModel[] = []
 
     r_rol = RoutesName.ROL.index.route
     r_rolEdit = RoutesName.ROL.edit.route
@@ -33,7 +33,7 @@ export class RolListTableComponent implements OnInit {
 
     getRolMenu() {
         this._roleService.getRolMenu().subscribe(({ data }) => {
-            this.viewModel = RoleMenuMapper(data)
+            this.listRolMenu = RoleMenuMapper(data)
         })
     }
 
@@ -51,7 +51,10 @@ export class RolListTableComponent implements OnInit {
                     this._roleService.deleteRole(id).subscribe({
                         next: ({ message }) => {
                             this._snackBarService.success(message)
-                            this._router.navigate([RoutesName.ROL.index.route])
+                            this.listRolMenu = this.listRolMenu.filter(
+                                (rol) => rol.id_rol !== id
+                            )
+                            // this._router.navigate([RoutesName.ROL.index.route])
                         },
                         error: () => {
                             this._snackBarService.error(
