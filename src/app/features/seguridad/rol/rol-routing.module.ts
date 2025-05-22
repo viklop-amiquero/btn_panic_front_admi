@@ -4,6 +4,7 @@ import { IndexRolPageComponent } from './pages/index-rol-page/index-rol-page.com
 import { RoutesName as rn } from '../../../shared/routes/routes'
 import { CreateRolPageComponent } from './pages/create-rol-page/create-rol-page.component'
 import { EditRolPageComponent } from './pages/edit-rol-page/edit-rol-page.component'
+import { roleMenuExistsGuard } from './guards/role-menu-exists.guard'
 
 const routes: Routes = [
     {
@@ -17,6 +18,7 @@ const routes: Routes = [
     {
         // path: `${rn.ROL.edit.route}/:id`,
         path: `${rn.ROL.edit.route}/:id`,
+        canActivate: [roleMenuExistsGuard],
         component: EditRolPageComponent,
     },
     {

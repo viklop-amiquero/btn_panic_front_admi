@@ -17,6 +17,7 @@ import { buildRolForm } from '../../../../../shared/helpers/build-rol-form'
 import { SpanFormRol } from '../../models/interfaces/span-form-rol'
 import { transformRolFormValue } from '../../../../../shared/helpers/transform-rol-form-value'
 import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
+import { ParamsUrlService } from '../../../../services/paramsUrl/params-url.service'
 
 @Component({
     selector: 'app-edit-rol-page',
@@ -42,7 +43,8 @@ export class EditRolPageComponent extends FormBaseComponent implements OnInit {
         private _snackbarService: SnackbarService,
         private _activateRoute: ActivatedRoute,
         private _rolService: RolService,
-        private _router: Router
+        private _router: Router,
+        private _paramsUrlService: ParamsUrlService
     ) {
         super(_validatorService)
     }
@@ -58,32 +60,21 @@ export class EditRolPageComponent extends FormBaseComponent implements OnInit {
                     this.menuList = mapMenuDtoToVmList(menus.data)
                     this.buildForm()
 
-                    // Convertir id a número y validar
+                    // Ya no validamos el ID porque el guard lo hace
                     this.idRol = Number(
                         this._activateRoute.snapshot.params['id']
                     )
-                    if (isNaN(this.idRol)) {
-                        this._router.navigate([this.r_rol])
-                        return EMPTY
-                    }
 
-                    // Llamar al backend y capturar errores
-                    return this._rolService.getRoleMenuById(this.idRol).pipe(
-                        catchError((err) => {
-                            this._router.navigate([this.r_rol])
-                            return EMPTY
-                        })
-                    )
+                    return this._rolService.getRoleMenuById(this.idRol)
                 }),
                 tap((data) => {
-                    if (!data || data.data.length === 0) {
-                        this._router.navigate([this.r_rol])
-                        return
-                    }
-
                     this.rolMenu = mapToRoleMenuCardVm(data)
                     this.setFormValues()
                     this.setSpanValues()
+                }),
+                catchError((err) => {
+                    this._router.navigate([this.r_rol])
+                    return EMPTY
                 })
             )
             .subscribe()

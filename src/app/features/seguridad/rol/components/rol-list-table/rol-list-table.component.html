@@ -2,7 +2,7 @@
     <div class="heading">
         <h3>{{ rol.rol }}</h3>
 
-        <div class="action-buttons">
+        <div class="action-buttons" *ngIf="rol.id_rol !== 1">
             <button
                 [routerLink]="'/' + r_rol + '/' + r_rolEdit + '/' + rol.id_rol"
                 mat-raised-button
