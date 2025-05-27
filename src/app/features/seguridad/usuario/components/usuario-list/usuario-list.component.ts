@@ -22,9 +22,9 @@ export class UsuarioListComponent implements OnInit {
         'domicilio',
         'telefono',
         'estado',
+        'acciones',
     ]
 
-    // datasource!: MatTableDataSource<UsuarioDto>
     datasource: UsuarioDto[] = []
     totalItems = 0
     pageSize = 5
@@ -43,15 +43,10 @@ export class UsuarioListComponent implements OnInit {
     getUsuarios(page: number) {
         this._usuarioService.getUsuarios(page).subscribe({
             next: (resp) => {
-                console.log(resp)
-
                 this.datasource = resp.data
                 this.totalItems = resp.meta.total
                 this.pageSize = resp.meta.per_page
                 this.currentPage = resp.meta.current_page
-
-                // this.dataSource.paginator = this.paginator
-                // this.datasource.paginator = this.paginator
             },
             error: (err) => {
                 this._snackBarService.error(
@@ -62,6 +57,8 @@ export class UsuarioListComponent implements OnInit {
     }
 
     onPageChange(event: PageEvent) {
-        this.getUsuarios(event.pageIndex + 1) // Angular Material usa 0-index, tu API usa 1-index
+        this.getUsuarios(event.pageIndex + 1)
     }
+
+    onDelete(id: number): void {}
 }
