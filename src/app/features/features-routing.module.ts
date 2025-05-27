@@ -33,6 +33,19 @@ const routes: Routes = [
                 ],
             },
             {
+                path: rn.USUARIO.index.route,
+                component: HeaderLayoutComponent,
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () =>
+                            import('./seguridad/usuario/usuario.module').then(
+                                (m) => m.UsuarioModule
+                            ),
+                    },
+                ],
+            },
+            {
                 path: '**',
                 redirectTo: rn.INDEX.route,
                 // redirectTo: 'login',

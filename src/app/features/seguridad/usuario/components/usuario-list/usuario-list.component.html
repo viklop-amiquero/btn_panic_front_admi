@@ -1,0 +1,105 @@
+<!-- <table mat-table [dataSource]="datasource"> -->
+<table mat-table [dataSource]="datasource" *ngIf="datasource.length > 0">
+    <!-- N° -->
+    <ng-container matColumnDef="no">
+        <th mat-header-cell *matHeaderCellDef>N°</th>
+        <td mat-cell *matCellDef="let element; let i = index">
+            {{ (currentPage - 1) * pageSize + i + 1 }}
+        </td>
+    </ng-container>
+
+    <!-- Username -->
+    <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef>Usuario</th>
+        <td mat-cell *matCellDef="let element">{{ element.username }}</td>
+    </ng-container>
+
+    <!-- Rol -->
+    <ng-container matColumnDef="rol">
+        <th mat-header-cell *matHeaderCellDef>Rol</th>
+        <td mat-cell *matCellDef="let element">{{ element.rol }}</td>
+    </ng-container>
+
+    <!-- Nombre -->
+    <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let element">
+            {{ element.persona?.nombre }}
+        </td>
+    </ng-container>
+
+    <!-- Apellido -->
+    <ng-container matColumnDef="apellido">
+        <th mat-header-cell *matHeaderCellDef>Apellido</th>
+        <td mat-cell *matCellDef="let element">
+            {{ element.persona?.apellido }}
+        </td>
+    </ng-container>
+
+    <!-- DNI -->
+    <ng-container matColumnDef="dni">
+        <th mat-header-cell *matHeaderCellDef>DNI</th>
+        <td mat-cell *matCellDef="let element">{{ element.persona?.dni }}</td>
+    </ng-container>
+
+    <!-- Digito Verificador -->
+    <ng-container matColumnDef="digito_verificador">
+        <th mat-header-cell *matHeaderCellDef>DV</th>
+        <td mat-cell *matCellDef="let element">
+            {{ element.persona?.digito_verificador }}
+        </td>
+    </ng-container>
+
+    <!-- Domicilio -->
+    <ng-container matColumnDef="domicilio">
+        <th mat-header-cell *matHeaderCellDef>Domicilio</th>
+        <td mat-cell *matCellDef="let element">
+            {{ element.persona?.direccion_domicilio }}
+        </td>
+    </ng-container>
+
+    <!-- Domicilio -->
+    <ng-container matColumnDef="telefono">
+        <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+        <td mat-cell *matCellDef="let element">
+            {{ element.persona?.telefono }}
+        </td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef>estado</th>
+        <td mat-cell *matCellDef="let element">
+            {{ element.estado }}
+        </td>
+    </ng-container> -->
+
+    <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let element">
+            <span [appEstado]="element.estado"></span>
+        </td>
+    </ng-container>
+
+    <!-- Agrega las demás columnas necesarias aquí... -->
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<!-- <mat-paginator
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    (page)="onPageChange($event)"
+>
+</mat-paginator> -->
+
+<mat-paginator
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+    (page)="onPageChange($event)"
+>
+</mat-paginator>
