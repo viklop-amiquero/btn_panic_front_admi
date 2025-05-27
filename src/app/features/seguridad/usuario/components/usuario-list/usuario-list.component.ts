@@ -13,6 +13,7 @@ import { UsuarioDto } from '../../models/dtos/usuario-paged.dto'
 export class UsuarioListComponent implements OnInit {
     displayedColumns: string[] = [
         'no',
+        'password_attemps',
         'username',
         'rol',
         'nombre',
@@ -21,6 +22,10 @@ export class UsuarioListComponent implements OnInit {
         'digito_verificador',
         'domicilio',
         'telefono',
+        'usuario_crea',
+        'usuario_modifica',
+        'created_at',
+        'updated_at',
         'estado',
         'acciones',
     ]
