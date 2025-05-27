@@ -8,8 +8,8 @@ export interface UsuarioDto {
     username: string
     password_attempts: number
     estado: string
-    usuario_crea: null
-    usuario_modifica: number | null
+    usuario_crea: null | string
+    usuario_modifica: null | string
     created_at: null
     updated_at: Date | null
     rol: string
@@ -23,8 +23,8 @@ interface Persona {
     dni: string
     digito_verificador: string
     telefono: string
-    usuario_crea: null
-    usuario_modifica: null
+    usuario_crea: null | string
+    usuario_modifica: null | string
     created_at: null
     updated_at: Date | null
 }
