@@ -18,6 +18,10 @@ const routes: Routes = [
         path: rn.USUARIO.edit.route,
         component: EditUsuarioPageComponent,
     },
+    {
+        path: '**',
+        redirectTo: `/${rn.ROL.index.route}`,
+    },
 ]
 
 @NgModule({

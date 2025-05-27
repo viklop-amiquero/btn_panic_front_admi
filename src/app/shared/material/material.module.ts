@@ -11,7 +11,7 @@ import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list'
 import { MatRadioModule } from '@angular/material/radio'
 import { MatDialogModule } from '@angular/material/dialog'
-
+import { MatSelectModule } from '@angular/material/select'
 @NgModule({
     exports: [
         MatTableModule,
@@ -26,6 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog'
         MatListModule,
         MatRadioModule,
         MatDialogModule,
+        MatSelectModule,
     ],
 })
 export class MaterialModule {}

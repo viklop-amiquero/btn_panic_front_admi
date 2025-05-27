@@ -1,1 +1,82 @@
-<p>usuario-form works!</p>
+<form
+    *ngIf="form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="form-container mat-elevation-z2"
+>
+    <h2 class="form-title">
+        {{ title }}
+        <span *ngIf="span?.show">{{ span?.title | titlecase }}</span>
+    </h2>
+
+    <div class="form-grid">
+        <mat-form-field appearance="outline">
+            <mat-label>Nombres</mat-label>
+            <input matInput formControlName="nombre" />
+            <mat-error *ngIf="isInvalidField('nombre')">
+                {{ getErrorMessage('nombre') }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Apellidos</mat-label>
+            <input matInput formControlName="apellido" />
+            <mat-error *ngIf="isInvalidField('apellido')">
+                {{ getErrorMessage('apellido') }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Dirección</mat-label>
+            <input matInput formControlName="direccion_domicilio" />
+            <mat-error *ngIf="isInvalidField('direccion_domicilio')">
+                {{ getErrorMessage('direccion_domicilio') }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>DNI</mat-label>
+            <input matInput formControlName="dni" />
+            <mat-error *ngIf="isInvalidField('dni')">
+                {{ getErrorMessage('dni') }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Dígito Verificador</mat-label>
+            <input matInput formControlName="digito_verificador" />
+            <mat-error *ngIf="isInvalidField('digito_verificador')">
+                {{ getErrorMessage('digito_verificador') }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Teléfono</mat-label>
+            <input matInput formControlName="telefono" />
+            <mat-error *ngIf="isInvalidField('telefono')">
+                {{ getErrorMessage('telefono') }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Rol</mat-label>
+            <mat-select formControlName="role_id">
+                @for (role of roleList; track role) {
+                <mat-option [value]="role.id">{{ role.nombre }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+        <button
+            mat-flat-button
+            color="primary"
+            type="submit"
+            [disabled]="form.invalid"
+        >
+            <mat-icon>save</mat-icon>
+            Guardar Usuario
+        </button>
+    </div>
+</form>

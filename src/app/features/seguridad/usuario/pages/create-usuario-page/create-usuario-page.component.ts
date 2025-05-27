@@ -1,11 +1,66 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { HeaderLayoutService } from '../../../../services/headerLayout/header-layout.service'
+import { RoutesName } from '../../../../../shared/routes/routes'
+import { FormBaseComponent } from '../../../../../shared/base/form-base'
+import { ValidatorsService } from '../../../../../shared/services/validators/validators.service'
+import { buildUsuarioForm } from '../../../../../shared/helpers/buil-usuario-form'
+import { RolService } from '../../../rol/services/rol.service'
+import { RoleDto } from '../../../rol/models/dtos/role-list.dto'
 
 @Component({
-  selector: 'app-create-usuario-page',
-  standalone: false,
-  templateUrl: './create-usuario-page.component.html',
-  styleUrl: './create-usuario-page.component.css'
+    selector: 'app-create-usuario-page',
+    standalone: false,
+    templateUrl: './create-usuario-page.component.html',
+    styleUrl: './create-usuario-page.component.css',
 })
-export class CreateUsuarioPageComponent {
+export class CreateUsuarioPageComponent
+    extends FormBaseComponent
+    implements OnInit
+{
+    title = 'Nuevo usuario'
+    rn = RoutesName
+    roleList!: RoleDto[]
+    constructor(
+        private _headerLayoutService: HeaderLayoutService,
+        private _validatorService: ValidatorsService,
+        private _roleService: RolService
+    ) {
+        super(_validatorService)
+    }
 
+    ngOnInit(): void {
+        this.setHeaderLayoutService()
+        this.getRoles()
+    }
+
+    setHeaderLayoutService(): void {
+        this._headerLayoutService.setHeader({
+            breadcrumbs: [
+                { label: 'Usuario', link: '' },
+                { label: 'Crear', link: '' },
+            ],
+            title: 'Usuarios',
+            showButton: false,
+            buttonLabel: 'Nuevo Rol',
+            buttonIcon: 'add',
+            link: `${this.rn.USUARIO.create.route}`,
+        })
+
+        this.buildForm()
+    }
+
+    buildForm() {
+        this.form = buildUsuarioForm(this._validatorService)
+    }
+
+    getRoles() {
+        this._roleService.getRoles().subscribe(({ data }) => {
+            console.log(data)
+            this.roleList = data
+        })
+    }
+
+    onSubmit(): void {
+        this.onSubmitForm(this.form, () => {})
+    }
 }

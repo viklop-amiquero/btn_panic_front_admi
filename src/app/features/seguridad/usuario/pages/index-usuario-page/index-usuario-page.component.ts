@@ -16,7 +16,7 @@ export class IndexUsuarioPageComponent {
     ngOnInit(): void {
         this._headerLayoutService.setHeader({
             breadcrumbs: [
-                { label: 'Usuario', link: `${this.rn.USUARIO.index.route}` },
+                { label: 'Usuario', link: '' },
                 { label: 'Lista', link: `${this.rn.USUARIO.index.route}` },
             ],
             title: 'Usuarios',

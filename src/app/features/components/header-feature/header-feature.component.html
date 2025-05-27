@@ -2,7 +2,8 @@
     <div class="left">
         <nav class="breadcrumbs" *ngIf="breadcrumbs.length">
             <ng-container *ngFor="let item of breadcrumbs; let last = last">
-                <a [routerLink]="item.link" class="enlace">{{ item.label }}</a>
+                <!-- <a [routerLink]="item.link" class="enlace">{{ item.label }}</a> -->
+                <p class="enlace">{{ item.label }}</p>
                 <mat-icon *ngIf="!last">chevron_right</mat-icon>
             </ng-container>
         </nav>

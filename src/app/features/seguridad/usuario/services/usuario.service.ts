@@ -18,13 +18,6 @@ export class UsuarioService {
         private _headerHttpService: HeaderHttpService
     ) {}
 
-    // getUsuarios(): Observable<UsuarioPagedDto> {
-    //     return this._http.get<UsuarioPagedDto>(`${this._apiUrl}/api/user`, {
-    //         headers: this._headerHttpService.getHeaders(
-    //             this._tokenService.getToken()
-    //         ),
-    //     })
-    // }
     getUsuarios(page: number = 1): Observable<UsuarioPagedDto> {
         return this._http.get<UsuarioPagedDto>(
             `${this._apiUrl}/api/user?page=${page}`,
