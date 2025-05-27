@@ -1,14 +1,3 @@
-// import { Directive } from '@angular/core';
-
-// @Directive({
-//   selector: '[appEstado]',
-//   standalone: false
-// })
-// export class EstadoDirective {
-
-//   constructor() { }
-
-// }
 import {
     Directive,
     ElementRef,
@@ -42,13 +31,13 @@ export class EstadoDirective implements OnChanges {
                 text: 'Eliminado',
                 bgColor: '#fef2f2',
                 textColor: '#b91c1c',
-            }, // rojo claro
+            },
             '1': { text: 'Activo', bgColor: '#ecfdf5', textColor: '#047857' }, // verde
             '2': {
                 text: 'Suspendido',
                 bgColor: '#fff7ed',
                 textColor: '#b45309',
-            }, // naranja
+            },
         }
 
         const estadoInfo = estadoMap[this.estado] || {
@@ -68,7 +57,8 @@ export class EstadoDirective implements OnChanges {
             this.el.nativeElement,
             'color',
             estadoInfo.textColor
-        ) // ← ✅ esta línea ahora es dinámica
+        )
+
         this.renderer.setStyle(this.el.nativeElement, 'padding', '4px 8px')
         this.renderer.setStyle(this.el.nativeElement, 'borderRadius', '999px')
         this.renderer.setStyle(this.el.nativeElement, 'fontWeight', '500')
