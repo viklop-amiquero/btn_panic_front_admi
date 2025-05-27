@@ -6,6 +6,9 @@ import { ValidatorsService } from '../../../../../shared/services/validators/val
 import { buildUsuarioForm } from '../../../../../shared/helpers/buil-usuario-form'
 import { RolService } from '../../../rol/services/rol.service'
 import { RoleDto } from '../../../rol/models/dtos/role-list.dto'
+import { UsuarioService } from '../../services/usuario.service'
+import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
+import { Router } from '@angular/router'
 
 @Component({
     selector: 'app-create-usuario-page',
@@ -23,7 +26,10 @@ export class CreateUsuarioPageComponent
     constructor(
         private _headerLayoutService: HeaderLayoutService,
         private _validatorService: ValidatorsService,
-        private _roleService: RolService
+        private _roleService: RolService,
+        private _usuarioService: UsuarioService,
+        private _snackbarService: SnackbarService,
+        private _rouer: Router
     ) {
         super(_validatorService)
     }
@@ -55,12 +61,25 @@ export class CreateUsuarioPageComponent
 
     getRoles() {
         this._roleService.getRoles().subscribe(({ data }) => {
-            console.log(data)
             this.roleList = data
         })
     }
 
     onSubmit(): void {
-        this.onSubmitForm(this.form, () => {})
+        this.onSubmitForm(this.form, () => {
+            const data = this.getCurrentCredentials()
+            this._usuarioService.createUsuario(data).subscribe({
+                next: ({ message }) => {
+                    this._snackbarService.success(`${message}`)
+                    this.form.reset()
+                    this._rouer.navigate([RoutesName.USUARIO.index.route])
+                },
+                error: (err) => {
+                    this._snackbarService.error(
+                        'Ocurió un error, por favor inténtelo más tarde'
+                    )
+                },
+            })
+        })
     }
 }

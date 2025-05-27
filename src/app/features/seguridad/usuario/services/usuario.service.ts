@@ -5,6 +5,8 @@ import { TokenService } from '../../../../shared/services/token/token.service'
 import { HeaderHttpService } from '../../../services/headerHttp/header-http.service'
 import { Observable } from 'rxjs'
 import { UsuarioPagedDto } from '../models/dtos/usuario-paged.dto'
+import { UsuarioCreateRequest } from '../models/requests/usuario-create.request'
+import { UsuarioCreateResponse } from '../models/responses/usuario-create.response'
 
 @Injectable({
     providedIn: 'root',
@@ -21,6 +23,20 @@ export class UsuarioService {
     getUsuarios(page: number = 1): Observable<UsuarioPagedDto> {
         return this._http.get<UsuarioPagedDto>(
             `${this._apiUrl}/api/user?page=${page}`,
+            {
+                headers: this._headerHttpService.getHeaders(
+                    this._tokenService.getToken()
+                ),
+            }
+        )
+    }
+
+    createUsuario(
+        data: UsuarioCreateRequest
+    ): Observable<UsuarioCreateResponse> {
+        return this._http.post<UsuarioCreateResponse>(
+            `${this._apiUrl}/api/user`,
+            data,
             {
                 headers: this._headerHttpService.getHeaders(
                     this._tokenService.getToken()

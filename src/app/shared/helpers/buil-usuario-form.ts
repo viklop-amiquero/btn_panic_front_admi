@@ -5,7 +5,7 @@ export function buildUsuarioForm(
     validatorService: ValidatorsService
 ): FormGroup {
     const controls: { [key: string]: FormControl } = {
-        nombre: new FormControl('', [
+        name: new FormControl('', [
             Validators.required,
             Validators.pattern(validatorService.namePattern),
             Validators.maxLength(50),
