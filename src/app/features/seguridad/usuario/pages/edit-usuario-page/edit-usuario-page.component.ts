@@ -9,6 +9,7 @@ import { FormBaseComponent } from '../../../../../shared/base/form-base'
 import { ValidatorsService } from '../../../../../shared/services/validators/validators.service'
 import { buildUsuarioForm } from '../../../../../shared/helpers/buil-usuario-form'
 import { RolService } from '../../../rol/services/rol.service'
+import { UsuarioFormData } from '../../models/dtos/usuario-form.dto'
 
 @Component({
     selector: 'app-edit-usuario-page',
@@ -23,7 +24,7 @@ export class EditUsuarioPageComponent
     title = 'Editar usuario :'
     span?: SpanForm
     rn = RoutesName
-    usuario!: UsuarioDto
+    usuarioFormData!: UsuarioFormData
 
     constructor(
         private _headerLayoutService: HeaderLayoutService,
@@ -38,7 +39,6 @@ export class EditUsuarioPageComponent
     ngOnInit(): void {
         this.setHeaderLayoutService()
         this.getUsuario()
-        this.setSpanValues()
         this.buildForm()
     }
 
@@ -59,28 +59,42 @@ export class EditUsuarioPageComponent
     getUsuario(): void {
         this._activateRoute.params.subscribe(({ id }) => {
             this._usuarioService.getUsuarioById(id).subscribe(({ data }) => {
-                // console.log(resp)
-                this.usuario = data
-                console.log(this.usuario)
+                this.usuarioFormData = data
+                this.setFormValues()
+                this.setSpanValues()
             })
         })
     }
 
     setSpanValues(): void {
-        // console.log(this.usuario)
-        // this.span = {
-        //     title: `${this.usuario.persona.nombre} ${this.usuario.persona.apellido}`,
-        //     show: true,
-        // }
+        const { nombre, apellido } = this.usuarioFormData
+        this.span = {
+            title: `${nombre} ${apellido}`,
+            show: true,
+        }
     }
 
     setFormValues(): void {
-        if (!this.usuario) return
+        if (!this.usuarioFormData) return
+
+        const {
+            nombre,
+            apellido,
+            direccion_domicilio,
+            dni,
+            digito_verificador,
+            telefono,
+            role_id,
+        } = this.usuarioFormData
 
         this.form.patchValue({
-            name: 'hola mundo',
-            apellido: 'hola',
-            direccion_domicilio: 'hol',
+            name: nombre,
+            apellido,
+            direccion_domicilio,
+            dni,
+            digito_verificador,
+            telefono,
+            role_id,
         })
     }
 

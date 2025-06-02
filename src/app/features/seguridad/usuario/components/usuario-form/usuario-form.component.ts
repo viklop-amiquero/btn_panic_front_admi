@@ -33,7 +33,6 @@ export class UsuarioFormComponent implements OnInit {
     getRoles() {
         this._rolService.getRoles().subscribe(({ data }) => {
             this.roleList = data
-            console.log(data)
         })
     }
 }

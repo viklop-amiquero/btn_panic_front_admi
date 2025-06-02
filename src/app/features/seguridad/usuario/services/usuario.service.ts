@@ -7,7 +7,7 @@ import { Observable } from 'rxjs'
 import { UsuarioPagedDto } from '../models/dtos/usuario-paged.dto'
 import { UsuarioCreateRequest } from '../models/requests/usuario-create.request'
 import { UsuarioCreateResponse } from '../models/responses/usuario-create.response'
-import { UsuarioListDto } from '../models/dtos/usuario-show.dto'
+import { UsuarioFormDto } from '../models/dtos/usuario-form.dto'
 
 @Injectable({
     providedIn: 'root',
@@ -32,8 +32,8 @@ export class UsuarioService {
         )
     }
 
-    getUsuarioById(id: number): Observable<UsuarioListDto> {
-        return this._http.get<UsuarioListDto>(
+    getUsuarioById(id: number): Observable<UsuarioFormDto> {
+        return this._http.get<UsuarioFormDto>(
             `${this._apiUrl}/api/user/${id}`,
             {
                 headers: this._headerHttpService.getHeaders(
