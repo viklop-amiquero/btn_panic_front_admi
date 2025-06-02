@@ -15,12 +15,12 @@ const routes: Routes = [
         component: CreateUsuarioPageComponent,
     },
     {
-        path: `{rn.USUARIO.edit.route}/:id`,
+        path: `${rn.USUARIO.edit.route}/:id`,
         component: EditUsuarioPageComponent,
     },
     {
         path: '**',
-        redirectTo: `/${rn.ROL.index.route}`,
+        redirectTo: `/${rn.USUARIO.index.route}`,
     },
 ]
 

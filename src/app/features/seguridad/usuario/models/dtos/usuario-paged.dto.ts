@@ -5,6 +5,7 @@ export interface UsuarioPagedDto {
 }
 
 export interface UsuarioDto {
+    id: number
     username: string
     password_attempts: number
     estado: string

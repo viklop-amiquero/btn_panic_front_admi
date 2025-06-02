@@ -32,4 +32,12 @@ export class EditUsuarioPageComponent implements OnInit {
             link: '',
         })
     }
+
+    getUsuarioById(): void {}
+
+    setSpanValues(): void {
+        // this.span = {title: }
+    }
+
+    setFormValues(): void {}
 }

@@ -4,6 +4,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { UsuarioService } from '../../services/usuario.service'
 import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
 import { UsuarioDto } from '../../models/dtos/usuario-paged.dto'
+import { RoutesName } from '../../../../../shared/routes/routes'
 @Component({
     selector: 'usuario-list',
     standalone: false,
@@ -34,6 +35,10 @@ export class UsuarioListComponent implements OnInit {
     totalItems = 0
     pageSize = 5
     currentPage = 1
+
+    r_user = RoutesName.USUARIO.index.route
+    r_userEdit = RoutesName.USUARIO.edit.route
+
     constructor(
         private _usuarioService: UsuarioService,
         private _snackBarService: SnackbarService
