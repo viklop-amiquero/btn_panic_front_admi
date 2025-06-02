@@ -23,10 +23,6 @@ interface Persona {
     dni: string
     digito_verificador: string
     telefono: string
-    usuario_crea: null | string
-    usuario_modifica: null | string
-    created_at: null
-    updated_at: Date | null
 }
 
 interface Links {
