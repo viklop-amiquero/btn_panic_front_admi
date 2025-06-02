@@ -1,1 +1,7 @@
-<p>edit-usuario-page works!</p>
+<usuario-form
+    [form]="form"
+    [title]="title"
+    (submitted)="onSubmit()"
+    [isInvalidField]="isInvalidField.bind(this)"
+    [getErrorMessage]="getErrorMessage.bind(this)"
+></usuario-form>

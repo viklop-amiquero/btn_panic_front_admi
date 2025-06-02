@@ -22,7 +22,7 @@ export class CreateUsuarioPageComponent
 {
     title = 'Nuevo usuario'
     rn = RoutesName
-    roleList!: RoleDto[]
+    // roleList!: RoleDto[]
     constructor(
         private _headerLayoutService: HeaderLayoutService,
         private _validatorService: ValidatorsService,
@@ -36,7 +36,7 @@ export class CreateUsuarioPageComponent
 
     ngOnInit(): void {
         this.setHeaderLayoutService()
-        this.getRoles()
+        // this.getRoles()
     }
 
     setHeaderLayoutService(): void {
@@ -59,11 +59,11 @@ export class CreateUsuarioPageComponent
         this.form = buildUsuarioForm(this._validatorService)
     }
 
-    getRoles() {
-        this._roleService.getRoles().subscribe(({ data }) => {
-            this.roleList = data
-        })
-    }
+    // getRoles() {
+    //     this._roleService.getRoles().subscribe(({ data }) => {
+    //         this.roleList = data
+    //     })
+    // }
 
     onSubmit(): void {
         this.onSubmitForm(this.form, () => {
