@@ -14,9 +14,9 @@ import { RolService } from '../../services/rol.service'
 import { mapToRoleMenuCardVm } from '../../models/vm/RoleMenuCard.mapper'
 import { RoleMenuCardVm } from '../../models/vm/role-menu-card.vm'
 import { buildRolForm } from '../../../../../shared/helpers/build-rol-form'
-import { SpanFormRol } from '../../models/interfaces/span-form-rol'
 import { transformRolFormValue } from '../../../../../shared/helpers/transform-rol-form-value'
 import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
+import { SpanForm } from '../../models/interfaces/span-form'
 
 @Component({
     selector: 'app-edit-rol-page',
@@ -26,7 +26,7 @@ import { SnackbarService } from '../../../../../shared/services/snackbar/snackba
 })
 export class EditRolPageComponent extends FormBaseComponent implements OnInit {
     title = 'Editar rol :'
-    span!: SpanFormRol
+    span!: SpanForm
     rolMenu: RoleMenuCardVm[] = []
     permisoList: PermisoDto[] = []
     menuList: MenuVm[] = []

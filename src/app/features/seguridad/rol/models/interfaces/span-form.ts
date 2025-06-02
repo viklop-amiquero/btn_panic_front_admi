@@ -1,4 +1,4 @@
-export interface SpanFormRol {
+export interface SpanForm {
     title: string
     show: boolean
 }

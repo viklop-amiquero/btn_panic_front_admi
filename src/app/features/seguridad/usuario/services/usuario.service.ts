@@ -31,6 +31,8 @@ export class UsuarioService {
         )
     }
 
+    // getUsuarioById()
+
     createUsuario(
         data: UsuarioCreateRequest
     ): Observable<UsuarioCreateResponse> {

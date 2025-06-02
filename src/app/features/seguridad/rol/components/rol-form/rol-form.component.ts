@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { MenuVm } from '../../../../models/vm/menu.vm'
 import { PermisoDto } from '../../../../models/dtos/permiso-list.dto'
-import { SpanFormRol } from '../../models/interfaces/span-form-rol'
+import { SpanForm } from '../../models/interfaces/span-form'
 
 @Component({
     selector: 'rol-form',
@@ -13,7 +13,7 @@ import { SpanFormRol } from '../../models/interfaces/span-form-rol'
 export class RolFormComponent {
     @Input() form!: FormGroup
     @Input() title!: string
-    @Input() span?: SpanFormRol
+    @Input() span?: SpanForm
     @Input() menuList: MenuVm[] = []
     @Input() permisoList: PermisoDto[] = []
     @Input() isInvalidField!: (field: string) => boolean | null
