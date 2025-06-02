@@ -5,9 +5,9 @@ import { TokenService } from '../../../../shared/services/token/token.service'
 import { HeaderHttpService } from '../../../services/headerHttp/header-http.service'
 import { Observable } from 'rxjs'
 import { UsuarioPagedDto } from '../models/dtos/usuario-paged.dto'
-import { UsuarioCreateRequest } from '../models/requests/usuario-create.request'
-import { UsuarioCreateResponse } from '../models/responses/usuario-create.response'
 import { UsuarioFormDto } from '../models/dtos/usuario-form.dto'
+import { UsuarioFormRequest } from '../models/requests/usuario-form.request'
+import { UsuarioFormResponse } from '../models/responses/usuario-form.response'
 
 @Injectable({
     providedIn: 'root',
@@ -43,11 +43,24 @@ export class UsuarioService {
         )
     }
 
-    createUsuario(
-        data: UsuarioCreateRequest
-    ): Observable<UsuarioCreateResponse> {
-        return this._http.post<UsuarioCreateResponse>(
+    createUsuario(data: UsuarioFormRequest): Observable<UsuarioFormResponse> {
+        return this._http.post<UsuarioFormResponse>(
             `${this._apiUrl}/api/user`,
+            data,
+            {
+                headers: this._headerHttpService.getHeaders(
+                    this._tokenService.getToken()
+                ),
+            }
+        )
+    }
+
+    updateUsuario(
+        id: number,
+        data: UsuarioFormRequest
+    ): Observable<UsuarioFormResponse> {
+        return this._http.put<UsuarioFormResponse>(
+            `${this._apiUrl}/api/user/${id}`,
             data,
             {
                 headers: this._headerHttpService.getHeaders(

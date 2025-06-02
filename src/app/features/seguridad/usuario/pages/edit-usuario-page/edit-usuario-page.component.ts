@@ -3,13 +3,13 @@ import { HeaderLayoutService } from '../../../../services/headerLayout/header-la
 import { RoutesName } from '../../../../../shared/routes/routes'
 import { SpanForm } from '../../../rol/models/interfaces/span-form'
 import { UsuarioService } from '../../services/usuario.service'
-import { ActivatedRoute } from '@angular/router'
-import { UsuarioDto } from '../../models/dtos/usuario-paged.dto'
+import { ActivatedRoute, Router } from '@angular/router'
 import { FormBaseComponent } from '../../../../../shared/base/form-base'
 import { ValidatorsService } from '../../../../../shared/services/validators/validators.service'
 import { buildUsuarioForm } from '../../../../../shared/helpers/buil-usuario-form'
 import { RolService } from '../../../rol/services/rol.service'
 import { UsuarioFormData } from '../../models/dtos/usuario-form.dto'
+import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
 
 @Component({
     selector: 'app-edit-usuario-page',
@@ -22,6 +22,7 @@ export class EditUsuarioPageComponent
     implements OnInit
 {
     title = 'Editar usuario :'
+    id_usuario!: number
     span?: SpanForm
     rn = RoutesName
     usuarioFormData!: UsuarioFormData
@@ -31,7 +32,9 @@ export class EditUsuarioPageComponent
         private _validatorService: ValidatorsService,
         private _usuarioService: UsuarioService,
         private _activateRoute: ActivatedRoute,
-        private _rolService: RolService
+        private _rolService: RolService,
+        private _snackbarService: SnackbarService,
+        private _router: Router
     ) {
         super(_validatorService)
     }
@@ -60,6 +63,7 @@ export class EditUsuarioPageComponent
         this._activateRoute.params.subscribe(({ id }) => {
             this._usuarioService.getUsuarioById(id).subscribe(({ data }) => {
                 this.usuarioFormData = data
+                this.id_usuario = data.id
                 this.setFormValues()
                 this.setSpanValues()
             })
@@ -102,5 +106,25 @@ export class EditUsuarioPageComponent
         this.form = buildUsuarioForm(this._validatorService)
     }
 
-    onSubmit(): void {}
+    onSubmit(): void {
+        if (!this.id_usuario) return
+
+        this.onSubmitForm(this.form, () => {
+            const request = this.getCurrentCredentials()
+            const id = this.id_usuario
+            this._usuarioService.updateUsuario(id, request).subscribe({
+                next: ({ message }) => {
+                    this._snackbarService.success(`${message}`)
+
+                    this.form.reset()
+                    this._router.navigate([RoutesName.USUARIO.index.route])
+                },
+                error: (err) => {
+                    this._snackbarService.error(
+                        'Ocurió un error, por favor inténtelo más tarde'
+                    )
+                },
+            })
+        })
+    }
 }

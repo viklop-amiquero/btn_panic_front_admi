@@ -3,6 +3,7 @@ export interface UsuarioFormDto {
 }
 
 export interface UsuarioFormData {
+    id: number
     nombre: string
     apellido: string
     direccion_domicilio: string

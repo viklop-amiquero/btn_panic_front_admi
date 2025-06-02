@@ -1,4 +1,4 @@
-export interface UsuarioCreateRequest {
+export interface UsuarioFormRequest {
     name: string
     apellido: string
     direccion_domicilio: string
