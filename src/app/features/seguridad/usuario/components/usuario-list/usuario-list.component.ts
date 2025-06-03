@@ -5,6 +5,8 @@ import { UsuarioService } from '../../services/usuario.service'
 import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
 import { UsuarioDto } from '../../models/dtos/usuario-paged.dto'
 import { RoutesName } from '../../../../../shared/routes/routes'
+import { ConfirmDialogService } from '../../../../services/confirmdialog/confirm-dialog.service'
+import { PasswordService } from '../../../../services/password/password.service'
 @Component({
     selector: 'usuario-list',
     standalone: false,
@@ -41,7 +43,9 @@ export class UsuarioListComponent implements OnInit {
 
     constructor(
         private _usuarioService: UsuarioService,
-        private _snackBarService: SnackbarService
+        private _snackBarService: SnackbarService,
+        private _confirmDialogService: ConfirmDialogService,
+        private _passwordService: PasswordService
     ) {}
 
     @ViewChild(MatPaginator) paginator!: MatPaginator
@@ -71,4 +75,28 @@ export class UsuarioListComponent implements OnInit {
     }
 
     onDelete(id: number): void {}
+
+    passwordReset(id: number): void {
+        this._confirmDialogService
+            .confirm({
+                title: 'Resetear contraseña',
+                message: '¿Estás seguro de que deseas resetear la contraseña.?',
+                confirmText: 'Sí, Resetear.',
+                cancelText: 'Cancelar',
+            })
+            .subscribe((confirmed) => {
+                if (confirmed) {
+                    this._passwordService.resetPassword(id).subscribe({
+                        next: ({ message }) => {
+                            this._snackBarService.success(message)
+                        },
+                        error: () => {
+                            this._snackBarService.error(
+                                'Ocurrió un error, por favor inténtelo más tarde.'
+                            )
+                        },
+                    })
+                }
+            })
+    }
 }

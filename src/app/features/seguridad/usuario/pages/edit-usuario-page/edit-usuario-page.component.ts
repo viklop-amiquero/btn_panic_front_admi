@@ -111,7 +111,9 @@ export class EditUsuarioPageComponent
 
         this.onSubmitForm(this.form, () => {
             const request = this.getCurrentCredentials()
+            console.log(request)
             const id = this.id_usuario
+
             this._usuarioService.updateUsuario(id, request).subscribe({
                 next: ({ message }) => {
                     this._snackbarService.success(`${message}`)

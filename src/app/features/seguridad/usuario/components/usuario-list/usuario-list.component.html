@@ -133,7 +133,12 @@
                     <!-- Editar -->
                 </button>
 
-                <button mat-icon-button color="primary" style="color: #2b7fff">
+                <button
+                    mat-icon-button
+                    color="primary"
+                    style="color: #2b7fff"
+                    (click)="passwordReset(element.id)"
+                >
                     <mat-icon>key</mat-icon>
                     <!-- Resetear -->
                 </button>
