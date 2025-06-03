@@ -19,7 +19,6 @@ export class PasswordService {
     ) {}
 
     resetPassword(id: number): Observable<MessageResponse> {
-        console.log(this._tokenService.getToken())
         return this._http.post<MessageResponse>(
             `${this._apiUrl}/api/password-reset/${id}`,
             {},

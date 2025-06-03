@@ -74,14 +74,41 @@ export class UsuarioListComponent implements OnInit {
         this.getUsuarios(event.pageIndex + 1)
     }
 
-    onDelete(id: number): void {}
+    onDeleteUsuario(id: number): void {
+        this._confirmDialogService
+            .confirm({
+                title: 'Eliminar usuario.',
+                message: '¿Estás seguro de que deseas eliminar el usuario.?',
+                confirmText: 'Sí, eliminar.',
+                cancelText: 'Cancelar',
+            })
+            .subscribe((confirmed) => {
+                if (confirmed) {
+                    this._usuarioService.deleteUsuario(id).subscribe({
+                        next: ({ message }) => {
+                            this._snackBarService.success(message)
+                            this.datasource.forEach((usuario) => {
+                                if (usuario.id === id) {
+                                    usuario.estado = '0'
+                                }
+                            })
+                        },
+                        error: () => {
+                            this._snackBarService.error(
+                                'Ocurrió un error, por favor inténtelo más tarde.'
+                            )
+                        },
+                    })
+                }
+            })
+    }
 
-    passwordReset(id: number): void {
+    onPasswordReset(id: number): void {
         this._confirmDialogService
             .confirm({
                 title: 'Resetear contraseña',
                 message: '¿Estás seguro de que deseas resetear la contraseña.?',
-                confirmText: 'Sí, Resetear.',
+                confirmText: 'Sí, resetear.',
                 cancelText: 'Cancelar',
             })
             .subscribe((confirmed) => {

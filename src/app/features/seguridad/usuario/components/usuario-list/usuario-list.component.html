@@ -137,7 +137,7 @@
                     mat-icon-button
                     color="primary"
                     style="color: #2b7fff"
-                    (click)="passwordReset(element.id)"
+                    (click)="onPasswordReset(element.id)"
                 >
                     <mat-icon>key</mat-icon>
                     <!-- Resetear -->
@@ -151,7 +151,7 @@
                     mat-icon-button
                     color="warn"
                     style="color: #ef4444"
-                    (click)="onDelete(element.id)"
+                    (click)="onDeleteUsuario(element.id)"
                 >
                     <!-- Si estado es 0, muestra "mode_off_on", de lo contrario "delete" -->
                     <mat-icon *ngIf="element.estado === '0'">check</mat-icon>

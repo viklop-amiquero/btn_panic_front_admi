@@ -8,6 +8,7 @@ import { UsuarioPagedDto } from '../models/dtos/usuario-paged.dto'
 import { UsuarioFormDto } from '../models/dtos/usuario-form.dto'
 import { UsuarioFormRequest } from '../models/requests/usuario-form.request'
 import { UsuarioFormResponse } from '../models/responses/usuario-form.response'
+import { MessageResponse } from '../../../models/interfaces/message.response'
 
 @Injectable({
     providedIn: 'root',
@@ -63,6 +64,17 @@ export class UsuarioService {
         return this._http.put<UsuarioFormResponse>(
             `${this._apiUrl}/api/user/${id}`,
             data,
+            {
+                headers: this._headerHttpService.getHeaders(
+                    this._tokenService.getToken()
+                ),
+            }
+        )
+    }
+
+    deleteUsuario(id: number): Observable<MessageResponse> {
+        return this._http.delete<MessageResponse>(
+            `${this._apiUrl}/api/user/${id}`,
             {
                 headers: this._headerHttpService.getHeaders(
                     this._tokenService.getToken()
