@@ -152,10 +152,13 @@
                     color="warn"
                     style="color: #ef4444"
                     (click)="onDeleteUsuario(element.id)"
+                    *ngIf="element.estado !== '0'"
                 >
                     <!-- Si estado es 0, muestra "mode_off_on", de lo contrario "delete" -->
-                    <mat-icon *ngIf="element.estado === '0'">check</mat-icon>
-                    <mat-icon *ngIf="element.estado !== '0'">delete</mat-icon>
+                    <!-- <mat-icon *ngIf="element.estado === '0'"
+                        >power_settings_circle</mat-icon
+                    > -->
+                    <mat-icon>delete</mat-icon>
                 </button>
             </div>
         </td>

@@ -21,7 +21,7 @@ export class IndexUsuarioPageComponent {
             ],
             title: 'Usuarios',
             showButton: true,
-            buttonLabel: 'Nuevo Rol',
+            buttonLabel: 'Nuevo usuario',
             buttonIcon: 'add',
             link: `${this.rn.USUARIO.create.route}`,
         })
