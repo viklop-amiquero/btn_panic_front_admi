@@ -6,4 +6,11 @@ export interface AuthResponse {
     role: string
     user: UserAuthDto
     persona: PersonaDto
+    role_menu: RoleMenu[]
+}
+interface RoleMenu {
+    id: number
+    role_id: number
+    menu_id: number
+    permiso_id: number
 }
