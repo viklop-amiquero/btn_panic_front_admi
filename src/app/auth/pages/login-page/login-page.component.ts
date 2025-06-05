@@ -46,8 +46,8 @@ export class LoginPageComponent extends FormBaseComponent implements OnInit {
     onSubmit(): void {
         this.onSubmitForm(this.form, () => {
             this._authService.login(this.getCurrentCredentials()).subscribe({
-                next: async ({ token }: AuthResponse) => {
-                    if (!token) {
+                next: async (resp: AuthResponse) => {
+                    if (!resp.token) {
                         this._snackBarService.warning(
                             'Respuesta inesperada del servidor.',
                             3000
@@ -58,9 +58,13 @@ export class LoginPageComponent extends FormBaseComponent implements OnInit {
                     // Almacenar el token
                     this._localStorageService.setLocalStorage(
                         'authToken',
-                        token
+                        resp.token
                     )
 
+                    this._localStorageService.setLocalStorage(
+                        'roleMenuAuth',
+                        JSON.stringify(resp.role_menu)
+                    )
                     this.form.reset()
 
                     // Redirigir a home
