@@ -1,30 +1,44 @@
 import { Injectable } from '@angular/core'
 import { RoleMenuAuthDto } from '../../../auth/models/dtos/RoleMenuAuth.dto'
 import { LocalStorageService } from '../../../shared/services/localstorage/local-storage.service'
+import { crud } from '../../../auth/models/types/crud.type'
 
 @Injectable({
     providedIn: 'root',
 })
 export class PermissionService {
-    private roleMenu!: RoleMenuAuthDto
+    private roleMenu!: RoleMenuAuthDto[]
 
     constructor(private _localStorageService: LocalStorageService) {
         this.loadRoleMenu()
     }
 
     loadRoleMenu() {
-        const resp = this._localStorageService.getLocalStorage('roleMenuAuth')
+        const resp = this._localStorageService.loadEncoded('roleMenuAuth')
 
         if (!resp) {
             return
         }
 
-        this.roleMenu = JSON.parse(resp)
+        this.roleMenu = resp
+        console.log(this.roleMenu)
     }
 
-    // userHasPermission(
-    //     role_id: number,
-    //     menuKey: string,
-    //     action: 'create' | 'read' | 'update' | 'delete'
-    // ): boolean {}
+    userHasPermission(menuKey: string, action: crud): boolean {
+        const roleMenu = this.roleMenu.filter(
+            (roleMenu) => roleMenu.menu_clave === menuKey
+        )
+
+        const permiso_id = roleMenu[0].permiso_id
+        switch (action) {
+            case 'create':
+                return permiso_id === 2 ? false : true
+            case 'read':
+                return permiso_id === 5 ? false : true
+            case 'update':
+                return permiso_id !== 4 && permiso_id !== 1 ? false : true
+            case 'delete':
+                return permiso_id === 1 ? true : false
+        }
+    }
 }
