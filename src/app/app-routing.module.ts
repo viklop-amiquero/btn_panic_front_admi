@@ -4,6 +4,7 @@ import { RoutesName } from './shared/routes/routes'
 import { IndexPageComponent } from './features/dashboard/pages/index-page/index-page.component'
 import { noAuthGuard } from './core/guards/no-auth.guard'
 import { authGuard } from './core/guards/auth.guard'
+import { UnauthorizedPageComponent } from './features/components/unauthorized-page/unauthorized-page.component'
 
 const routes: Routes = [
     {

@@ -5,6 +5,7 @@ import { RoutesName as rn } from '../shared/routes/routes'
 import { DashboardPageComponent } from './dashboard/pages/dashboard-page/dashboard-page.component'
 import { IndexPageComponent } from './dashboard/pages/index-page/index-page.component'
 import { HeaderLayoutComponent } from './layout/header-layout/header-layout.component'
+import { UnauthorizedPageComponent } from './components/unauthorized-page/unauthorized-page.component'
 
 const routes: Routes = [
     {
@@ -44,6 +45,10 @@ const routes: Routes = [
                             ),
                     },
                 ],
+            },
+            {
+                path: 'unauthorized',
+                component: UnauthorizedPageComponent,
             },
             {
                 path: '**',

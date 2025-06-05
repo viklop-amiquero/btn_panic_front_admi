@@ -14,4 +14,8 @@ export const RoutesName = {
         create: { route: 'create' },
         edit: { route: 'edit' },
     },
+    PAGESMESSAGE: {
+        unauthorized: { route: 'unauthorized' },
+        notfound: { route: 'not-found' },
+    },
 }

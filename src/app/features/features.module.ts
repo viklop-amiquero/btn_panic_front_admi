@@ -10,7 +10,8 @@ import { SidenavFeatureComponent } from './components/sidenav-feature/sidenav-fe
 import { ToolbarFeatureComponent } from './components/toolbar-feature/toolbar-feature.component'
 import { HeaderFeatureComponent } from './components/header-feature/header-feature.component'
 import { HeaderLayoutComponent } from './layout/header-layout/header-layout.component';
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component'
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { UnauthorizedPageComponent } from './components/unauthorized-page/unauthorized-page.component'
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
         HeaderFeatureComponent,
         HeaderLayoutComponent,
         ConfirmDialogComponent,
+        UnauthorizedPageComponent,
     ],
     imports: [CommonModule, FeaturesRoutingModule, SharedModule],
     exports: [HeaderFeatureComponent],
