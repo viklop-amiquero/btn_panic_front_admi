@@ -61,14 +61,6 @@ export class LoginPageComponent extends FormBaseComponent implements OnInit {
                         resp.token
                     )
 
-                    // this._localStorageService.setLocalStorage(
-                    //     'roleMenuAuth',
-                    //     JSON.stringify(resp.role_menu)
-                    // )
-                    this._localStorageService.saveEncoded(
-                        'roleMenuAuth',
-                        resp.role_menu
-                    )
                     this.form.reset()
 
                     // Redirigir a home
