@@ -15,7 +15,6 @@ export const permisionGuard: CanActivateFn = (route, state) => {
     if (!hasPermission) {
         console.log('no autorizado')
         return router.navigate([RoutesName.PAGESMESSAGE.unauthorized.route])
-        // return router.parseUrl('/unauthorized')
     }
 
     return true

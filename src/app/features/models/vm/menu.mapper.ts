@@ -9,6 +9,7 @@ export function mapMenuDtoToVmList(data: MenuDto[]): MenuVm[] {
         const vm: MenuVm & { orden: number } = {
             id: dto.id,
             nombre: dto.nombre,
+            clave: dto.clave,
             icono: dto.icono,
             ruta: dto.ruta,
             children: [],

@@ -5,6 +5,7 @@ export interface MenuListDto {
 export interface MenuDto {
     id: number
     nombre: string
+    clave: string
     icono: null | string
     descripcion: string
     url: null

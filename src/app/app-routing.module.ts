@@ -14,6 +14,10 @@ const routes: Routes = [
         canActivate: [noAuthGuard],
     },
     {
+        path: RoutesName.PAGESMESSAGE.unauthorized.route,
+        component: UnauthorizedPageComponent,
+    },
+    {
         path: RoutesName.INDEX.route,
         loadChildren: () =>
             import('./features/features.module').then((m) => m.FeaturesModule),
