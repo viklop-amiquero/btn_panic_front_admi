@@ -26,9 +26,8 @@ export class SidenavFeatureComponent implements OnInit {
     getMenu() {
         this._menuService.getMenu().subscribe(({ data }) => {
             const menus = mapMenuDtoToVmList(data)
-            console.log(menus)
-            console.log(this._permissionService.userHasMenu('roles'))
-            // console.log(menus)
+            const filteredMenus = this.filterMenusByPermission(menus)
+            this.menuList = filteredMenus
         })
     }
 
@@ -42,5 +41,29 @@ export class SidenavFeatureComponent implements OnInit {
 
     isMenuOpen(id: number): boolean {
         return this.openMenus.has(id)
+    }
+
+    filterMenusByPermission(menus: MenuVm[]): MenuVm[] {
+        return menus
+            .map((menu) => {
+                const allowedChildren = this.filterMenusByPermission(
+                    menu.children || []
+                )
+
+                const hasPermission = this._permissionService.userHasMenu(
+                    menu.clave
+                )
+
+                // Mostrar el menú si tiene permiso o si algún hijo tiene permiso
+                if (hasPermission || allowedChildren.length > 0) {
+                    return {
+                        ...menu,
+                        children: allowedChildren,
+                    }
+                }
+
+                return null
+            })
+            .filter((menu): menu is MenuVm => menu !== null)
     }
 }

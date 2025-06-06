@@ -29,7 +29,6 @@ export class IndexRolPageComponent implements OnInit {
 
     setHeaderLayoutService(): void {
         this.setValueButton()
-        console.log(this.showButton)
         this._headerLayoutService.setHeader({
             breadcrumbs: [
                 { label: 'Rol', link: `${this.rn.ROL.index.route}` },

@@ -44,11 +44,23 @@ export class PermissionService {
         }
     }
 
-    userHasMenu(menuKey: string): boolean {
-        const roleMenu = this.roleMenu.filter(
-            (roleMenu) => roleMenu.menu_clave === menuKey
-        )
+    // userHasMenu(menuKey: string): boolean {
+    // userHasMenu(menuKey: string) {
+    //     console.log(this.roleMenu)
+    // const roleMenu = this.roleMenu.filter(
+    //     (roleMenu) => roleMenu.menu_clave === menuKey
+    // )
 
-        return true
+    // return true
+    // }
+
+    userHasMenu(menuKey: string): boolean {
+        const roleMenu = this.roleMenu.find((rm) => rm.menu_clave === menuKey)
+        return roleMenu !== undefined && roleMenu.permiso_id !== 5
     }
+
+    // userHasMenu(menuKey: string): boolean {
+    //     if (!this.roleMenu) return false
+    //     return this.roleMenu.some((roleMenu) => roleMenu.menu_clave === menuKey)
+    // }
 }
