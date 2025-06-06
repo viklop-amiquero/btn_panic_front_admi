@@ -8,7 +8,6 @@ import { crud } from '../../../auth/models/types/crud.type'
 })
 export class PermissionService {
     private roleMenu!: RoleMenuAuthDto[]
-
     constructor(private _localStorageService: LocalStorageService) {
         this.loadRoleMenu()
     }
@@ -21,15 +20,18 @@ export class PermissionService {
         }
 
         this.roleMenu = resp
-        console.log(this.roleMenu)
     }
 
-    userHasPermission(menuKey: string, action: crud): boolean {
+    filterMenu(menuKey: string) {
         const roleMenu = this.roleMenu.filter(
             (roleMenu) => roleMenu.menu_clave === menuKey
         )
 
-        const permiso_id = roleMenu[0].permiso_id
+        return roleMenu
+    }
+
+    userHasPermission(menuKey: string, action: crud): boolean {
+        const permiso_id = this.filterMenu(menuKey)[0].permiso_id
         switch (action) {
             case 'create':
                 return permiso_id === 2 ? false : true
@@ -40,5 +42,13 @@ export class PermissionService {
             case 'delete':
                 return permiso_id === 1 ? true : false
         }
+    }
+
+    userHasMenu(menuKey: string): boolean {
+        const roleMenu = this.roleMenu.filter(
+            (roleMenu) => roleMenu.menu_clave === menuKey
+        )
+
+        return true
     }
 }

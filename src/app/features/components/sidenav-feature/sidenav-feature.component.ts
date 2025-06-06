@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { MenuService } from '../../services/menu/menu.service'
 import { MenuVm } from '../../models/vm/menu.vm'
 import { mapMenuDtoToVmList } from '../../models/vm/menu.mapper'
+import { PermissionService } from '../../services/permission/permission.service'
 
 @Component({
     selector: 'sidenav-feature',
@@ -13,7 +14,10 @@ export class SidenavFeatureComponent implements OnInit {
     menuList: MenuVm[] = []
     openMenus: Set<number> = new Set()
 
-    constructor(private _menuService: MenuService) {}
+    constructor(
+        private _menuService: MenuService,
+        private _permissionService: PermissionService
+    ) {}
 
     ngOnInit() {
         this.getMenu()
@@ -21,7 +25,10 @@ export class SidenavFeatureComponent implements OnInit {
 
     getMenu() {
         this._menuService.getMenu().subscribe(({ data }) => {
-            this.menuList = mapMenuDtoToVmList(data)
+            const menus = mapMenuDtoToVmList(data)
+            console.log(menus)
+            console.log(this._permissionService.userHasMenu('roles'))
+            // console.log(menus)
         })
     }
 
