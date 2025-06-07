@@ -11,6 +11,10 @@ import { RoleMenuByIdListdDto } from '../models/dtos/role-menu-by-id-list.dto'
 import { RolUpdateResponse } from '../models/responses/rol-update.response'
 import { RolDeleteResponse } from '../models/responses/rol-delete.response'
 import { RoleListDto } from '../models/dtos/role-list.dto'
+import {
+    RoleMenuAuth,
+    RoleMenuAuthDto,
+} from '../../../../auth/models/dtos/RoleMenuAuth.dto'
 @Injectable({
     providedIn: 'root',
 })
@@ -35,6 +39,17 @@ export class RolService {
                     return throwError(() => error)
                 })
             )
+    }
+
+    getRoleMenuAuth(): Observable<RoleMenuAuthDto> {
+        return this._http.get<RoleMenuAuthDto>(
+            `${this._apiUrl}/api/role-menu-auth`,
+            {
+                headers: this._headerHttpService.getHeaders(
+                    this._tokenService.getToken()
+                ),
+            }
+        )
     }
 
     getRoles(): Observable<RoleListDto> {

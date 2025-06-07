@@ -26,8 +26,10 @@ export class SidenavFeatureComponent implements OnInit {
     getMenu() {
         this._menuService.getMenu().subscribe(({ data }) => {
             const menus = mapMenuDtoToVmList(data)
+            console.log(data)
             const filteredMenus = this.filterMenusByPermission(menus)
             this.menuList = filteredMenus
+            console.log(this.menuList)
         })
     }
 

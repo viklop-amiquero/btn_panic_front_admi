@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http'
 import { HeaderHttpService } from '../headerHttp/header-http.service'
 import { TokenService } from '../../../shared/services/token/token.service'
 import { SnackbarService } from '../../../shared/services/snackbar/snackbar.service'
+import { RolService } from '../../seguridad/rol/services/rol.service'
 
 @Injectable({
     providedIn: 'root',
@@ -24,31 +25,19 @@ export class PermissionService {
         private _headerHttpService: HeaderHttpService,
         private _localStorageService: LocalStorageService,
         private _tokenService: TokenService,
-        private _snackBarService: SnackbarService
+        private _snackBarService: SnackbarService,
+        private _rolService: RolService
     ) {
-        this.loadRoleMenu()
+        this.loadRoleMenuAuth()
     }
 
-    loadRoleMenu() {
-        if (this.isLoad) return
-        this._http
-            .get<RoleMenuAuthDto>(`${this._apiUrl}/api/role-menu-auth`, {
-                headers: this._headerHttpService.getHeaders(
-                    this._tokenService.getToken()
-                ),
-            })
-            .subscribe({
-                next: (resp) => {
-                    this.roleMenu = resp.role_menu
-                    this.isLoad = true
-                },
-                error: (err) => {
-                    this._snackBarService.warning(
-                        'Ocurrió un error inesperado, por favor intentelo más tarde.',
-                        3000
-                    )
-                },
-            })
+    loadRoleMenuAuth() {
+        this._rolService.getRoleMenuAuth().subscribe({
+            next: ({ role_menu }) => {
+                this.roleMenu = role_menu
+            },
+            error: (err) => {},
+        })
     }
 
     filterMenu(menuKey: string) {
