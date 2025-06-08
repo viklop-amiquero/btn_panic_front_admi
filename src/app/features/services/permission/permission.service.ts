@@ -1,16 +1,6 @@
 import { Injectable } from '@angular/core'
-import {
-    RoleMenuAuth,
-    RoleMenuAuthDto,
-} from '../../../auth/models/dtos/RoleMenuAuth.dto'
-import { LocalStorageService } from '../../../shared/services/localstorage/local-storage.service'
+import { RoleMenuAuth } from '../../../auth/models/dtos/RoleMenuAuth.dto'
 import { crud } from '../../../auth/models/types/crud.type'
-import { environment } from '../../../../environments/environment'
-import { HttpClient } from '@angular/common/http'
-import { HeaderHttpService } from '../headerHttp/header-http.service'
-import { TokenService } from '../../../shared/services/token/token.service'
-import { SnackbarService } from '../../../shared/services/snackbar/snackbar.service'
-import { RolService } from '../../seguridad/rol/services/rol.service'
 
 @Injectable({
     providedIn: 'root',

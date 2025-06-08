@@ -50,9 +50,7 @@ export class CreateRolPageComponent
             menus: this._menuService.getMenu(),
         }).subscribe(({ permisos, menus }) => {
             this.permisoList = permisos.data
-            console.log(menus.data)
             this.menuList = mapMenuDtoToVmList(menus.data)
-            console.log(this.menuList)
             this.buildForm()
         })
 
