@@ -16,29 +16,9 @@ import { RolService } from '../../seguridad/rol/services/rol.service'
     providedIn: 'root',
 })
 export class PermissionService {
-    private _apiUrl: string = environment.apiUrl
-    private roleMenu!: RoleMenuAuth[]
-    private isLoad: boolean = false
+    public roleMenu!: RoleMenuAuth[]
 
-    constructor(
-        private _http: HttpClient,
-        private _headerHttpService: HeaderHttpService,
-        private _localStorageService: LocalStorageService,
-        private _tokenService: TokenService,
-        private _snackBarService: SnackbarService,
-        private _rolService: RolService
-    ) {
-        this.loadRoleMenuAuth()
-    }
-
-    loadRoleMenuAuth() {
-        this._rolService.getRoleMenuAuth().subscribe({
-            next: ({ role_menu }) => {
-                this.roleMenu = role_menu
-            },
-            error: (err) => {},
-        })
-    }
+    constructor() {}
 
     filterMenu(menuKey: string) {
         const roleMenu = this.roleMenu.filter(
@@ -61,15 +41,4 @@ export class PermissionService {
                 return permiso_id === 1 ? true : false
         }
     }
-
-    userHasMenu(menuKey: string): boolean {
-        if (!this.roleMenu) return false
-        const roleMenu = this.roleMenu.find((rm) => rm.menu_clave === menuKey)
-        return roleMenu !== undefined && roleMenu.permiso_id !== 5
-    }
-
-    // userHasMenu(menuKey: string): boolean {
-    //     const roleMenu = this.roleMenu.find((rm) => rm.menu_clave === menuKey)
-    //     return roleMenu !== undefined && roleMenu.permiso_id !== 5
-    // }
 }

@@ -60,7 +60,6 @@ export class UsuarioService {
         id: number,
         data: UsuarioFormRequest
     ): Observable<UsuarioFormResponse> {
-        console.log(data)
         return this._http.put<UsuarioFormResponse>(
             `${this._apiUrl}/api/user/${id}`,
             data,
