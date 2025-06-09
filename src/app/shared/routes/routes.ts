@@ -14,6 +14,10 @@ export const RoutesName = {
         create: { route: 'create' },
         edit: { route: 'edit' },
     },
+    REPORTE: {
+        mapa: { route: 'mapa' },
+        detalle: { route: 'reporte' },
+    },
     PAGESMESSAGE: {
         unauthorized: { route: 'unauthorized' },
         notfound: { route: 'not-found' },

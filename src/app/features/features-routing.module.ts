@@ -46,6 +46,18 @@ const routes: Routes = [
                 ],
             },
             {
+                path: rn.REPORTE.mapa.route,
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () =>
+                            import('./reporte/reporte.module').then(
+                                (m) => m.ReporteModule
+                            ),
+                    },
+                ],
+            },
+            {
                 path: '**',
                 redirectTo: '',
                 pathMatch: 'full',
