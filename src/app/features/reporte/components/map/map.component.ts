@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core'
+import { ReporteDto } from '../../models/dtos/reporte-list.dto'
+import { ReporteService } from '../../services/reporte.service'
+import { forkJoin } from 'rxjs'
+import { leafletHelper } from '../../shared/leaflet/leaflet.helper'
+import { ReporteDataMapaVM } from '../../models/vms/reporte-data-mapa.vm'
+import { reporteMapper } from '../../models/vms/reporte.mapper'
+
 import * as L from 'leaflet'
 
 @Component({
@@ -9,19 +16,21 @@ import * as L from 'leaflet'
 })
 export class MapComponent implements OnInit {
     private map: any
-
     private userMaker: L.Marker<any> | undefined
+    private reportes?: ReporteDataMapaVM[]
 
-    registros = [
-        { nombre: 'Comisaría Huamanga', lat: -13.1551, lng: -74.2312 },
-        { nombre: 'Hospital Ayacucho', lat: -13.1525, lng: -74.2279 },
-        { nombre: 'Colegio Guadalupe', lat: -13.1578, lng: -74.2331 },
-    ]
+    constructor(private _reporteService: ReporteService) {}
 
     ngOnInit(): void {
+        forkJoin({ reportes: this._reporteService.getReportes() }).subscribe({
+            next: ({ reportes }) => {
+                this.reportes = reporteMapper(reportes.data)
+                console.log(this.reportes)
+                this.loadMarkers()
+            },
+            error: (err) => {},
+        })
         this.initMap()
-        this.loadMarkers()
-        throw new Error('Method not implement.')
     }
 
     private initMap() {
@@ -32,11 +41,14 @@ export class MapComponent implements OnInit {
     }
 
     private loadMarkers() {
-        this.registros.forEach((registro) => {
-            const marker = L.marker([registro.lat, registro.lng]).addTo(
-                this.map
-            )
-            marker.bindPopup(`<strong>${registro.nombre}</strong>`)
+        if (this.reportes?.length === 0) return
+
+        this.reportes!.forEach((reporte) => {
+            const marker = L.marker(
+                [Number(reporte.latitud), Number(reporte.longitud)],
+                { icon: leafletHelper.alertIcon }
+            ).addTo(this.map)
+            marker.bindPopup(`<strong>${reporte.categoria}</strong>`)
         })
     }
 }
