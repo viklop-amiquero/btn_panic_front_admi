@@ -1,5 +1,15 @@
-<!-- <p>map-reporte-page works!</p> -->
 <div class="reporte-container">
+    <!-- Reloj de alarma -->
+    <div class="alarm-clock">
+        <div class="time">{{ currentTime | date : 'HH:mm:ss' }}</div>
+        <!-- <div class="alarm-indicator" *ngIf="alarmActive">ALARMA ACTIVA</div> -->
+    </div>
+
     <reporte-map class="reporte-map"></reporte-map>
     <reporte-list class="reporte-list"></reporte-list>
 </div>
+
+<!-- <div class="reporte-container">
+    <reporte-map class="reporte-map"></reporte-map>
+    <reporte-list class="reporte-list"></reporte-list>
+</div> -->

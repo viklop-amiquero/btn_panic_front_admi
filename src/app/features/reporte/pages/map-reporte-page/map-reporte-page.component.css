@@ -1,3 +1,59 @@
+/*
+estilos reloj
+*/
+/* Estilos del reloj de alarma */
+.alarm-clock {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background-color: #ff3d3d;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 61, 61, 0.5);
+    font-family: 'Digital', monospace;
+    text-align: center;
+    border: 3px solid #ff0000;
+    animation: pulse 2s infinite;
+}
+
+.time {
+    font-size: 3rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.alarm-indicator {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 5px;
+    text-transform: uppercase;
+    animation: blink 1s step-end infinite;
+}
+
+/* Animaciones */
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px rgba(255, 61, 61, 0.5); }
+    50% { box-shadow: 0 0 30px rgba(255, 61, 61, 0.8); }
+    100% { box-shadow: 0 0 10px rgba(255, 61, 61, 0.5); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Fuente digital (opcional, incluir en tu index.html) */
+@font-face {
+    font-family: 'Digital';
+    src: url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+}
+/*
+fin
+*/
+
 .reporte-container {
   display: flex;
   flex-direction: column;
