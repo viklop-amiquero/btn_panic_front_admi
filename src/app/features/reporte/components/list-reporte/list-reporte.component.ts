@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { ReporteDataMapaVM } from '../../models/vms/reporte-data-mapa.vm'
 import { ReporteService } from '../../services/reporte.service'
 import { reporteMapper } from '../../models/vms/reporte.mapper'
+import { ConfirmDialogService } from '../../../services/confirmdialog/confirm-dialog.service'
 
 @Component({
     selector: 'reporte-list',
@@ -14,7 +15,10 @@ export class ListReporteComponent implements OnInit {
 
     dataSource!: ReporteDataMapaVM[]
 
-    constructor(private _reporteService: ReporteService) {}
+    constructor(
+        private _reporteService: ReporteService,
+        private _confirmDialogService: ConfirmDialogService
+    ) {}
 
     ngOnInit(): void {
         this.getReportes()
@@ -26,6 +30,14 @@ export class ListReporteComponent implements OnInit {
                 this.dataSource = reporteMapper(data)
             },
             error: (err) => {},
+        })
+    }
+
+    showReporte(id: number) {
+        // console.log(id)
+        this._reporteService.getReporteById(id).subscribe(({ data }) => {
+            // console.log(resp)
+            this._confirmDialogService.updateReporte(data)
         })
     }
 }

@@ -5,6 +5,8 @@ import { TokenService } from '../../../shared/services/token/token.service'
 import { HeaderHttpService } from '../../services/headerHttp/header-http.service'
 import { Observable } from 'rxjs'
 import { ReporteListDto } from '../models/dtos/reporte-list.dto'
+import { ReporteShowDto } from '../models/dtos/reporte-show.dto'
+import { MessageResponse } from '../../models/interfaces/message.response'
 
 @Injectable({
     providedIn: 'root',
@@ -24,5 +26,28 @@ export class ReporteService {
                 this._tokenService.getToken()
             ),
         })
+    }
+
+    getReporteById(id: number): Observable<ReporteShowDto> {
+        return this._http.get<ReporteShowDto>(
+            `${this._apiUrl}/api/reporte/${id}`,
+            {
+                headers: this._headerHttpService.getHeaders(
+                    this._tokenService.getToken()
+                ),
+            }
+        )
+    }
+
+    updateReporte(id: number): Observable<MessageResponse> {
+        return this._http.patch<MessageResponse>(
+            `${this._apiUrl}/api/reporte/${id}`,
+            {},
+            {
+                headers: this._headerHttpService.getHeaders(
+                    this._tokenService.getToken()
+                ),
+            }
+        )
     }
 }

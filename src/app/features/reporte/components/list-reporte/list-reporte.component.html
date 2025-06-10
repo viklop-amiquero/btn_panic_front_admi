@@ -15,7 +15,11 @@
     <ng-container matColumnDef="acciones">
         <th mat-header-cell *matHeaderCellDef>Acciones</th>
         <td mat-cell *matCellDef="let element">
-            <button mat-icon-button color="primary">
+            <button
+                mat-icon-button
+                color="primary"
+                (click)="showReporte(element.id)"
+            >
                 <mat-icon style="color: #05df72">visibility</mat-icon>
             </button>
         </td>

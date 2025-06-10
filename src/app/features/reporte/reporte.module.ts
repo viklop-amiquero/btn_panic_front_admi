@@ -7,6 +7,7 @@ import { MapComponent } from './components/map/map.component'
 import { MapReportePageComponent } from './pages/map-reporte-page/map-reporte-page.component'
 import { ListReporteComponent } from './components/list-reporte/list-reporte.component'
 import { SharedModule } from '../../shared/shared.module'
+import { UpdateReporteComponent } from './components/dialog/update-reporte/update-reporte.component'
 
 @NgModule({
     declarations: [
@@ -14,6 +15,7 @@ import { SharedModule } from '../../shared/shared.module'
         MapComponent,
         MapReportePageComponent,
         ListReporteComponent,
+        UpdateReporteComponent,
     ],
     imports: [CommonModule, ReporteRoutingModule, SharedModule],
 })
