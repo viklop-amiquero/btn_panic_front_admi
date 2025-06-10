@@ -1,4 +1,9 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table
+    mat-table
+    [dataSource]="dataSource"
+    *ngIf="dataSource && dataSource.length > 0"
+    class="mat-elevation-z8"
+>
     <!-- Número -->
     <ng-container matColumnDef="numero">
         <th mat-header-cell *matHeaderCellDef>N°</th>
