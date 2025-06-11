@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { ReporteDataMapaVM } from '../../models/vms/reporte-data-mapa.vm'
-import { ReporteService } from '../../services/reporte.service'
+import { ReporteService } from '../../../reporte/services/reporte.service'
+import { ConfirmDialogService } from '../../../../services/confirmdialog/confirm-dialog.service'
 import { reporteMapper } from '../../models/vms/reporte.mapper'
-import { ConfirmDialogService } from '../../../services/confirmdialog/confirm-dialog.service'
 
 @Component({
     selector: 'reporte-list',

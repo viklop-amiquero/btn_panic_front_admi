@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core'
-import { environment } from '../../../../environments/environment'
+import { environment } from '../../../../../environments/environment'
 import { HttpClient } from '@angular/common/http'
-import { TokenService } from '../../../shared/services/token/token.service'
-import { HeaderHttpService } from '../../services/headerHttp/header-http.service'
+import { TokenService } from '../../../../shared/services/token/token.service'
+import { HeaderHttpService } from '../../../services/headerHttp/header-http.service'
 import { Observable } from 'rxjs'
-import { ReporteListDto } from '../models/dtos/reporte-list.dto'
-import { ReporteShowDto } from '../models/dtos/reporte-show.dto'
-import { MessageResponse } from '../../models/interfaces/message.response'
+import { ReporteListDto } from '../../mapa/models/dtos/reporte-list.dto'
+import { ReporteShowDto } from '../../mapa/models/dtos/reporte-show.dto'
+import { MessageResponse } from '../../../models/interfaces/message.response'
 
 @Injectable({
     providedIn: 'root',

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MapReportePageComponent } from './map-reporte-page.component';
+import { IndexMapaPageComponent } from './index-mapa-page.component';
 
-describe('MapReportePageComponent', () => {
-  let component: MapReportePageComponent;
-  let fixture: ComponentFixture<MapReportePageComponent>;
+describe('IndexMapaPageComponent', () => {
+  let component: IndexMapaPageComponent;
+  let fixture: ComponentFixture<IndexMapaPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MapReportePageComponent]
+      declarations: [IndexMapaPageComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MapReportePageComponent);
+    fixture = TestBed.createComponent(IndexMapaPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
+import { SnackbarService } from '../../../../../../shared/services/snackbar/snackbar.service'
 import { ReporteShow } from '../../../models/dtos/reporte-show.dto'
-import { ReporteService } from '../../../services/reporte.service'
-import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
+import { ReporteService } from '../../../../reporte/services/reporte.service'
 
 @Component({
     selector: 'app-update-reporte',
@@ -18,7 +18,6 @@ export class UpdateReporteComponent {
         private _reporteService: ReporteService,
         private _snackBarService: SnackbarService
     ) {}
-
     onSubmit(id: number) {
         // console.log(id)
         this._reporteService.updateReporte(id).subscribe({

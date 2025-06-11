@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core'
-import { ReporteDto } from '../../models/dtos/reporte-list.dto'
-import { ReporteService } from '../../services/reporte.service'
-import { forkJoin } from 'rxjs'
-import { leafletHelper } from '../../shared/leaflet/leaflet.helper'
 import { ReporteDataMapaVM } from '../../models/vms/reporte-data-mapa.vm'
+import { ReporteService } from '../../../reporte/services/reporte.service'
 import { reporteMapper } from '../../models/vms/reporte.mapper'
-
+import { forkJoin } from 'rxjs'
+import { leafletHelper } from '../../../shared/leaflet/leaflet.helper'
 import * as L from 'leaflet'
 
 @Component({
-    selector: 'reporte-map',
+    selector: 'reporte-mapa',
     standalone: false,
-    templateUrl: './map.component.html',
-    styleUrl: './map.component.css',
+    templateUrl: './mapa.component.html',
+    styleUrl: './mapa.component.css',
 })
-export class MapComponent implements OnInit {
+export class MapaComponent implements OnInit {
     private map: any
     private userMaker: L.Marker<any> | undefined
     private reportes?: ReporteDataMapaVM[]

@@ -14,8 +14,8 @@ export const RoutesName = {
         create: { route: 'create' },
         edit: { route: 'edit' },
     },
-    REPORTE: {
-        INDEX: { route: 'reporte' },
+    REPORTES: {
+        reporte: { route: 'reporte' },
         mapa: { route: 'mapa' },
     },
     PAGESMESSAGE: {

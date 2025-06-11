@@ -3,8 +3,10 @@ import { ConfirmDialog } from '../../models/interfaces/confirm-dialog'
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component'
 import { MatDialog } from '@angular/material/dialog'
 import { Observable } from 'rxjs'
-import { UpdateReporteComponent } from '../../reporte/components/dialog/update-reporte/update-reporte.component'
-import { ReporteShow } from '../../reporte/models/dtos/reporte-show.dto'
+import { ReporteShow } from '../../reportes/mapa/models/dtos/reporte-show.dto'
+import { UpdateReporteComponent } from '../../reportes/mapa/components/dialog/update-reporte/update-reporte.component'
+// import { UpdateReporteComponent } from '../../reporte/components/dialog/update-reporte/update-reporte.component'
+// import { ReporteShow } from '../../reporte/models/dtos/reporte-show.dto'
 
 @Injectable({
     providedIn: 'root',

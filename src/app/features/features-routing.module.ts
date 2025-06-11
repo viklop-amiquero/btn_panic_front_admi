@@ -46,12 +46,24 @@ const routes: Routes = [
                 ],
             },
             {
-                path: rn.REPORTE.INDEX.route,
+                path: rn.REPORTES.mapa.route,
                 children: [
                     {
                         path: '',
                         loadChildren: () =>
-                            import('./reporte/reporte.module').then(
+                            import('./reportes/mapa/mapa.module').then(
+                                (m) => m.MapaModule
+                            ),
+                    },
+                ],
+            },
+            {
+                path: rn.REPORTES.reporte.route,
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () =>
+                            import('./reportes/reporte/reporte.module').then(
                                 (m) => m.ReporteModule
                             ),
                     },
