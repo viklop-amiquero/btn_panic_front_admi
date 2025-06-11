@@ -46,7 +46,7 @@ const routes: Routes = [
                 ],
             },
             {
-                path: rn.REPORTE.mapa.route,
+                path: rn.REPORTE.INDEX.route,
                 children: [
                     {
                         path: '',

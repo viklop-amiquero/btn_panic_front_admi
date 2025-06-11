@@ -7,7 +7,8 @@ import { MapComponent } from './components/map/map.component'
 import { MapReportePageComponent } from './pages/map-reporte-page/map-reporte-page.component'
 import { ListReporteComponent } from './components/list-reporte/list-reporte.component'
 import { SharedModule } from '../../shared/shared.module'
-import { UpdateReporteComponent } from './components/dialog/update-reporte/update-reporte.component'
+import { UpdateReporteComponent } from './components/dialog/update-reporte/update-reporte.component';
+import { DetailedReportListComponent } from './components/detailed-report-list/detailed-report-list.component'
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import { UpdateReporteComponent } from './components/dialog/update-reporte/updat
         MapReportePageComponent,
         ListReporteComponent,
         UpdateReporteComponent,
+        DetailedReportListComponent,
     ],
     imports: [CommonModule, ReporteRoutingModule, SharedModule],
 })

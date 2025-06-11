@@ -34,7 +34,7 @@ export class MapComponent implements OnInit {
     }
 
     private initMap() {
-        this.map = L.map('map').setView([-13.155092, -74.23107], 15)
+        this.map = L.map('map').setView([-13.169749, -74.199644], 15)
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(
             this.map
         )
