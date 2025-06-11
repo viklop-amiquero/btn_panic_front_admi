@@ -1,4 +1,4 @@
-export interface ReporteListDto {
+export interface ReportePagedDto {
     data: ReporteDto[]
     links: Links
     meta: Meta
@@ -6,8 +6,8 @@ export interface ReporteListDto {
 
 export interface ReporteDto {
     id: number
-    imagen: null
-    descripcion: string
+    imagen?: string
+    descripcion?: string
     categoria: string
     direccion: string
     usuario_nombre: null | string
