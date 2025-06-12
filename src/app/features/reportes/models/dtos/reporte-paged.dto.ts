@@ -17,8 +17,8 @@ export interface ReporteDto {
     latitud: string
     longitud: string
     estado: string
-    usuario_crea: null
-    usuario_modifica: null
+    usuario_crea?: string
+    usuario_modifica?: string
     created_at: string
     created_date: string
     updated_at: null

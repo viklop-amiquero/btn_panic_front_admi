@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { SnackbarService } from '../../../../../../shared/services/snackbar/snackbar.service'
-import { ReporteShow } from '../../../models/dtos/reporte-show.dto'
 import { ReporteService } from '../../../../reporte/services/reporte.service'
+import { ReporteShow } from '../../../../models/dtos/reporte-show.dto'
 
 @Component({
     selector: 'app-update-reporte',

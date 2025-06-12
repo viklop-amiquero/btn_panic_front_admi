@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core'
-import { ReporteDataMapaVM } from '../../models/vms/reporte-data-mapa.vm'
 import { ReporteService } from '../../../reporte/services/reporte.service'
-import { reporteMapper } from '../../models/vms/reporte.mapper'
 import { forkJoin } from 'rxjs'
 import { leafletHelper } from '../../../shared/leaflet/leaflet.helper'
 import * as L from 'leaflet'
+import { ReporteDataMapaVM } from '../../../models/vms/reporte-data-mapa.vm'
+import { reporteMapper } from '../../../models/vms/reporte.mapper'
 
 @Component({
     selector: 'reporte-mapa',

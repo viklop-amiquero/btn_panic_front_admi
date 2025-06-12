@@ -1,5 +1,5 @@
 import { ReporteDataMapaVM } from './reporte-data-mapa.vm'
-import { ReporteDto } from '../dtos/reporte-list.dto'
+import { ReporteDto } from '../dtos/reporte-paged.dto'
 
 export function reporteMapper(reportes: ReporteDto[]): ReporteDataMapaVM[] {
     return reportes

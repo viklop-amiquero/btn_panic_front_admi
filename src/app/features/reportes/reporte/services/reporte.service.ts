@@ -4,9 +4,9 @@ import { HttpClient } from '@angular/common/http'
 import { TokenService } from '../../../../shared/services/token/token.service'
 import { HeaderHttpService } from '../../../services/headerHttp/header-http.service'
 import { Observable } from 'rxjs'
-import { ReporteShowDto } from '../../mapa/models/dtos/reporte-show.dto'
 import { MessageResponse } from '../../../models/interfaces/message.response'
-import { ReportePagedDto } from '../../mapa/models/dtos/reporte-list.dto'
+import { ReportePagedDto } from '../../models/dtos/reporte-paged.dto'
+import { ReporteShowDto } from '../../models/dtos/reporte-show.dto'
 
 @Injectable({
     providedIn: 'root',
@@ -46,6 +46,17 @@ export class ReporteService {
         return this._http.patch<MessageResponse>(
             `${this._apiUrl}/api/reporte/${id}`,
             {},
+            {
+                headers: this._headerHttpService.getHeaders(
+                    this._tokenService.getToken()
+                ),
+            }
+        )
+    }
+
+    deleteReporte(id: number): Observable<MessageResponse> {
+        return this._http.delete<MessageResponse>(
+            `${this._apiUrl}/api/reporte/${id}`,
             {
                 headers: this._headerHttpService.getHeaders(
                     this._tokenService.getToken()

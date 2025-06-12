@@ -34,9 +34,9 @@ export class EstadoDirective implements OnChanges {
             },
             '1': { text: 'Activo', bgColor: '#ecfdf5', textColor: '#047857' }, // verde
             '2': {
-                text: 'Suspendido',
-                bgColor: '#fff7ed',
-                textColor: '#b45309',
+                text: 'Atendido',
+                bgColor: '#dbeafe',
+                textColor: '#2b7fff',
             },
         }
 

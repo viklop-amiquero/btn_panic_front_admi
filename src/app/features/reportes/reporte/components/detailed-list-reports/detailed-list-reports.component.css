@@ -1,0 +1,36 @@
+/* Tabla responsive */
+th{
+    text-align: center;
+    font-weight: bold;
+}
+
+table {
+  width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+mat-header-cell, mat-cell {
+  white-space: nowrap;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  table {
+    font-size: 12px;
+  }
+
+  mat-header-cell, mat-cell {
+    padding: 8px;
+  }
+
+  button mat-icon {
+    font-size: 18px;
+  }
+}
+
+/* centrar displaycolums */
+th.mat-header-cell,
+td.mat-cell {
+  text-align: center;
+}
