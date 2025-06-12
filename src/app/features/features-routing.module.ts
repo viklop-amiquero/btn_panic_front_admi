@@ -59,6 +59,7 @@ const routes: Routes = [
             },
             {
                 path: rn.REPORTES.reporte.route,
+                component: HeaderLayoutComponent,
                 children: [
                     {
                         path: '',
