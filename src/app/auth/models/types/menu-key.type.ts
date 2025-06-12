@@ -1,0 +1,11 @@
+export type menuKey =
+    | 'roles'
+    | 'usuarios'
+    | 'dashboard'
+    | 'home'
+    | 'home'
+    | 'mantenimiento'
+    | 'categoria'
+    | 'seguridad'
+    | 'mapa'
+    | 'detalle'

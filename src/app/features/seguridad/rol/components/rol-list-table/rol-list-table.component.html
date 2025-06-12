@@ -1,68 +1,67 @@
-<div class="contenedor" *ngFor="let rol of listRolMenu">
-    <div class="heading">
-        <h3>{{ rol.rol }}</h3>
+<ng-container *ngIf="permiso_id !== 3">
+    <div class="contenedor" *ngFor="let rol of listRolMenu">
+        <div class="heading">
+            <h3>{{ rol.rol }}</h3>
 
-        <div class="action-buttons" *ngIf="rol.id_rol !== 1">
-            <button
-                [routerLink]="'/' + r_rol + '/' + r_rolEdit + '/' + rol.id_rol"
-                mat-raised-button
-                color="primary"
+            <div
+                class="action-buttons"
+                *ngIf="rol.id_rol !== 1 && permiso_id !== 2"
             >
-                <mat-icon>edit</mat-icon>
-                Editar
-            </button>
+                <button
+                    [routerLink]="
+                        '/' + r_rol + '/' + r_rolEdit + '/' + rol.id_rol
+                    "
+                    mat-raised-button
+                    color="primary"
+                >
+                    <mat-icon>edit</mat-icon>
+                    Editar
+                </button>
 
-            <button
-                mat-raised-button
-                style="color: #fb2c36"
-                (click)="onDeleteRol(rol.id_rol)"
-            >
-                <mat-icon>delete</mat-icon>
-                Eliminar
-            </button>
+                <button
+                    *ngIf="permiso_id === 1"
+                    mat-raised-button
+                    style="color: #fb2c36"
+                    (click)="onDeleteRol(rol.id_rol)"
+                >
+                    <mat-icon>delete</mat-icon>
+                    Eliminar
+                </button>
+            </div>
         </div>
+
+        <p class="descripcion">{{ rol.descripcion }}</p>
+        <table mat-table [dataSource]="rol.permisos" class="mat-elevation-z8">
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>No.</th>
+                <td mat-cell *matCellDef="let permiso; let i = index">
+                    {{ i + 1 }}
+                </td>
+            </ng-container>
+
+            <!-- Menú Column -->
+            <ng-container matColumnDef="menu">
+                <th mat-header-cell *matHeaderCellDef>Menú</th>
+                <td mat-cell *matCellDef="let permiso">{{ permiso.menu }}</td>
+            </ng-container>
+
+            <!-- Permiso Column -->
+            <ng-container matColumnDef="permiso">
+                <th mat-header-cell *matHeaderCellDef>Permiso</th>
+                <td mat-cell *matCellDef="let permiso">
+                    {{ permiso.permiso }}
+                </td>
+            </ng-container>
+
+            <tr
+                mat-header-row
+                *matHeaderRowDef="['id', 'menu', 'permiso']"
+            ></tr>
+            <tr
+                mat-row
+                *matRowDef="let row; columns: ['id', 'menu', 'permiso']"
+            ></tr>
+        </table>
     </div>
-
-    <!-- <div class="heading">
-        <h3>
-            {{ rol.rol }}
-        </h3>
-        <button
-            [routerLink]="'/' + r_rol + '/' + r_rolEdit + '/' + rol.id_rol"
-            mat-raised-button
-            color="primary"
-        >
-            <mat-icon>edit</mat-icon>
-            Editar
-        </button>
-    </div> -->
-
-    <p class="descripcion">{{ rol.descripcion }}</p>
-    <table mat-table [dataSource]="rol.permisos" class="mat-elevation-z8">
-        <!-- ID Column -->
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef>No.</th>
-            <td mat-cell *matCellDef="let permiso; let i = index">
-                {{ i + 1 }}
-            </td>
-        </ng-container>
-
-        <!-- Menú Column -->
-        <ng-container matColumnDef="menu">
-            <th mat-header-cell *matHeaderCellDef>Menú</th>
-            <td mat-cell *matCellDef="let permiso">{{ permiso.menu }}</td>
-        </ng-container>
-
-        <!-- Permiso Column -->
-        <ng-container matColumnDef="permiso">
-            <th mat-header-cell *matHeaderCellDef>Permiso</th>
-            <td mat-cell *matCellDef="let permiso">{{ permiso.permiso }}</td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="['id', 'menu', 'permiso']"></tr>
-        <tr
-            mat-row
-            *matRowDef="let row; columns: ['id', 'menu', 'permiso']"
-        ></tr>
-    </table>
-</div>
+</ng-container>

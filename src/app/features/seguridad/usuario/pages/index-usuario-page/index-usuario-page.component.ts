@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { RoutesName } from '../../../../../shared/routes/routes'
 import { HeaderLayoutService } from '../../../../services/headerLayout/header-layout.service'
+import { PermissionService } from '../../../../services/permission/permission.service'
 
 @Component({
     selector: 'app-index-usuario-page',
@@ -10,20 +11,36 @@ import { HeaderLayoutService } from '../../../../services/headerLayout/header-la
 })
 export class IndexUsuarioPageComponent {
     rn = RoutesName
+    showButtonSave!: boolean
 
-    constructor(private _headerLayoutService: HeaderLayoutService) {}
+    constructor(
+        private _headerLayoutService: HeaderLayoutService,
+        private _permissionService: PermissionService
+    ) {}
 
     ngOnInit(): void {
+        this.setHeaderLayoutService()
+    }
+
+    setHeaderLayoutService(): void {
+        this.setValueButton()
         this._headerLayoutService.setHeader({
             breadcrumbs: [
                 { label: 'Usuario', link: '' },
                 { label: 'Lista', link: `${this.rn.USUARIO.index.route}` },
             ],
             title: 'Usuarios',
-            showButton: true,
+            showButton: this.showButtonSave,
             buttonLabel: 'Nuevo usuario',
             buttonIcon: 'add',
             link: `${this.rn.USUARIO.create.route}`,
         })
+    }
+
+    setValueButton(): void {
+        this.showButtonSave = this._permissionService.userHasPermission(
+            'usuarios',
+            'create'
+        )
     }
 }

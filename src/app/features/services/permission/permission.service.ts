@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { RoleMenuAuth } from '../../../auth/models/dtos/RoleMenuAuth.dto'
 import { crud } from '../../../auth/models/types/crud.type'
+import { menuKey } from '../../../auth/models/types/menu-key.type'
 
 @Injectable({
     providedIn: 'root',
@@ -18,7 +19,7 @@ export class PermissionService {
         return roleMenu
     }
 
-    userHasPermission(menuKey: string, action: crud): boolean {
+    userHasPermission(menuKey: menuKey, action: crud): boolean {
         const permiso_id = this.filterMenu(menuKey)[0].permiso_id
         switch (action) {
             case 'create':

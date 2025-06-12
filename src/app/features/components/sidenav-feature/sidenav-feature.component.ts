@@ -42,7 +42,6 @@ export class SidenavFeatureComponent implements OnInit {
                     menus,
                     roleMenuAuth.role_menu
                 )
-                console.log(this.menuList)
             },
             error: (err) => {
                 this._snackBarService.warning(

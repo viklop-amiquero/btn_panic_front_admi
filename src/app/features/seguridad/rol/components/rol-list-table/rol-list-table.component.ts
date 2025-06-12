@@ -6,6 +6,8 @@ import { RoutesName } from '../../../../../shared/routes/routes'
 import { ConfirmDialogService } from '../../../../services/confirmdialog/confirm-dialog.service'
 import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
 import { Router } from '@angular/router'
+import { PermissionService } from '../../../../services/permission/permission.service'
+import { forkJoin } from 'rxjs'
 
 @Component({
     selector: 'rol-list-table',
@@ -16,26 +18,42 @@ import { Router } from '@angular/router'
 export class RolListTableComponent implements OnInit {
     displayedColumns: string[] = ['id', 'rol', 'menu', 'permiso']
     listRolMenu: RoleMenuViewModel[] = []
-
     r_rol = RoutesName.ROL.index.route
     r_rolEdit = RoutesName.ROL.edit.route
+    showAcciones!: boolean
+    permiso_id!: number
 
     constructor(
         private _roleService: RolService,
         private _confirmDialogService: ConfirmDialogService,
         private _snackBarService: SnackbarService,
-        private _router: Router
+        private _router: Router,
+        private _permissionService: PermissionService
     ) {}
 
     ngOnInit() {
-        this.getRolMenu()
+        forkJoin({
+            roleMenu: this._roleService.getRolMenu(),
+        }).subscribe({
+            next: ({ roleMenu }) => {
+                this.listRolMenu = RoleMenuMapper(roleMenu.data)
+                this.getPermission()
+            },
+            error: (err) => {},
+        })
+        // this.getRolMenu()
     }
 
-    getRolMenu() {
-        this._roleService.getRolMenu().subscribe(({ data }) => {
-            this.listRolMenu = RoleMenuMapper(data)
-        })
+    getPermission() {
+        this.permiso_id =
+            this._permissionService.filterMenu('roles')[0].permiso_id
     }
+
+    // getRolMenu() {
+    //     this._roleService.getRolMenu().subscribe(({ data }) => {
+    //         this.listRolMenu = RoleMenuMapper(data)
+    //     })
+    // }
 
     onDeleteRol(id: number): void {
         this._confirmDialogService
