@@ -7,6 +7,7 @@ import { UsuarioDto } from '../../models/dtos/usuario-paged.dto'
 import { RoutesName } from '../../../../../shared/routes/routes'
 import { ConfirmDialogService } from '../../../../services/confirmdialog/confirm-dialog.service'
 import { PasswordService } from '../../../../services/password/password.service'
+import { PermissionService } from '../../../../services/permission/permission.service'
 @Component({
     selector: 'usuario-list',
     standalone: false,
@@ -30,9 +31,9 @@ export class UsuarioListComponent implements OnInit {
         'created_at',
         'updated_at',
         'estado',
-        'acciones',
+        // 'acciones',
     ]
-
+    permiso_id!: number
     datasource: UsuarioDto[] = []
     totalItems = 0
     pageSize = 5
@@ -45,13 +46,24 @@ export class UsuarioListComponent implements OnInit {
         private _usuarioService: UsuarioService,
         private _snackBarService: SnackbarService,
         private _confirmDialogService: ConfirmDialogService,
-        private _passwordService: PasswordService
+        private _passwordService: PasswordService,
+        private _permissionService: PermissionService
     ) {}
 
     @ViewChild(MatPaginator) paginator!: MatPaginator
 
     ngOnInit() {
         this.getUsuarios(this.currentPage)
+        this.getPermission()
+    }
+
+    getPermission() {
+        this.permiso_id =
+            this._permissionService.filterMenu('usuarios')[0].permiso_id
+
+        if (this.permiso_id !== 2) {
+            this.displayedColumns.push('acciones')
+        }
     }
 
     getUsuarios(page: number) {

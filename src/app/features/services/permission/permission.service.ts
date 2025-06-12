@@ -11,7 +11,7 @@ export class PermissionService {
 
     constructor() {}
 
-    filterMenu(menuKey: string) {
+    filterMenu(menuKey: menuKey) {
         const roleMenu = this.roleMenu.filter(
             (roleMenu) => roleMenu.menu_clave === menuKey
         )
