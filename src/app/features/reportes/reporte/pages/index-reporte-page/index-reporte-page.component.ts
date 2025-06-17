@@ -14,7 +14,6 @@ export class IndexReportePageComponent implements OnInit {
     constructor(private _headerLayoutService: HeaderLayoutService) {}
 
     ngOnInit(): void {
-        console.log('reporte')
         this._headerLayoutService.setHeader({
             breadcrumbs: [
                 { label: 'Reporte', link: '' },
