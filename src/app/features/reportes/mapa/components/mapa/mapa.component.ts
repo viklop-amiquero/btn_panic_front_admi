@@ -23,7 +23,6 @@ export class MapaComponent implements OnInit {
         forkJoin({ reportes: this._reporteService.getReportes() }).subscribe({
             next: ({ reportes }) => {
                 this.reportes = reporteMapper(reportes.data)
-                console.log(this.reportes)
                 this.loadMarkers()
             },
             error: (err) => {},
