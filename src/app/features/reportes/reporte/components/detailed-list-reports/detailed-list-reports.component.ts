@@ -4,7 +4,7 @@ import { ReporteService } from '../../services/reporte.service'
 import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
 import { ConfirmDialogService } from '../../../../services/confirmdialog/confirm-dialog.service'
 import { MatPaginator } from '@angular/material/paginator'
-
+import { environment } from '../../../../../../environments/environment'
 @Component({
     selector: 'list-reports-detailed',
     standalone: false,
@@ -92,5 +92,9 @@ export class DetailedListReportsComponent implements OnInit {
                     })
                 }
             })
+    }
+
+    getImagenUrl(imagen: string): string {
+        return `${environment.apiUrl}/storage/${imagen}`
     }
 }

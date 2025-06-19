@@ -34,3 +34,7 @@ th.mat-header-cell,
 td.mat-cell {
   text-align: center;
 }
+
+.imagen-reporte{
+    max-width: 400px;
+}
