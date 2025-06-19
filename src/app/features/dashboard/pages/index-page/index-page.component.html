@@ -1,0 +1,17 @@
+<div class="home-container">
+    <h2 class="home-title">Home</h2>
+
+    <div class="menu-grid">
+        <ng-container *ngFor="let roleMenu of roleMenus">
+            <a
+                *ngIf="roleMenu.ruta"
+                class="menu-card"
+                [routerLink]="roleMenu.ruta"
+                routerLinkActive="active"
+            >
+                <mat-icon class="icon">{{ roleMenu.icono }}</mat-icon>
+                <span>{{ roleMenu.menu_clave | titlecase }}</span>
+            </a>
+        </ng-container>
+    </div>
+</div>

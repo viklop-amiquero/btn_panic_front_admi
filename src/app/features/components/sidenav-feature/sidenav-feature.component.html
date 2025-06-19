@@ -3,6 +3,7 @@
         <div
             class="btn-arrow"
             (click)="menu.children.length > 0 && toggleMenu(menu.id)"
+            [routerLink]="menu.ruta"
         >
             <div class="cotenedor-menu">
                 <div class="menu-main">
