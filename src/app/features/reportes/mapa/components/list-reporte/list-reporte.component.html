@@ -13,7 +13,14 @@
     <!-- Categoría -->
     <ng-container matColumnDef="categoria">
         <th mat-header-cell *matHeaderCellDef>Categoría</th>
-        <td mat-cell *matCellDef="let element">{{ element.categoria }}</td>
+        <td
+            mat-cell
+            *matCellDef="let element"
+            (click)="selectReporte(element)"
+            class="td_hover"
+        >
+            {{ element.categoria }}
+        </td>
     </ng-container>
 
     <!-- Acciones -->

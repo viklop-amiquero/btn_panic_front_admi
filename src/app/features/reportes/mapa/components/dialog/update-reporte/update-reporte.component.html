@@ -5,7 +5,7 @@
         <!-- Sección de imagen si existe -->
         <div *ngIf="data.imagen" class="imagen-section">
             <img
-                [src]="data.imagen"
+                [src]="getImagenUrl(data.imagen)"
                 alt="Imagen del reporte"
                 class="reporte-imagen"
             />

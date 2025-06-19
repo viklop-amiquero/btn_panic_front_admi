@@ -1,0 +1,8 @@
+.td_hover{
+    cursor: pointer;
+}
+
+.td_hover:hover{
+    background-color: #efefef;
+    border-radius: 20px;
+}

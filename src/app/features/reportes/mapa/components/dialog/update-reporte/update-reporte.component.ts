@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { SnackbarService } from '../../../../../../shared/services/snackbar/snackbar.service'
 import { ReporteService } from '../../../../reporte/services/reporte.service'
 import { ReporteShow } from '../../../../models/dtos/reporte-show.dto'
+import { environment } from '../../../../../../../environments/environment'
 
 @Component({
     selector: 'app-update-reporte',
@@ -29,5 +30,9 @@ export class UpdateReporteComponent {
                 // console.log(err)
             },
         })
+    }
+
+    getImagenUrl(imagen: string): string {
+        return `${environment.apiUrl}/storage/${imagen}`
     }
 }

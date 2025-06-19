@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core'
-import { ReporteService } from '../../../reporte/services/reporte.service'
-import { forkJoin } from 'rxjs'
+import { Component, Input, OnInit } from '@angular/core'
 import { leafletHelper } from '../../../shared/leaflet/leaflet.helper'
 import * as L from 'leaflet'
-import { ReporteDataMapaVM } from '../../../models/vms/reporte-data-mapa.vm'
-import { reporteMapper } from '../../../models/vms/reporte.mapper'
 import { EchoService } from '../../../../services/echo/echo.service'
+import { ReporteDataMapaVM } from '../../../models/vms/reporte-data-mapa.vm'
 
 @Component({
     selector: 'reporte-mapa',
@@ -15,13 +12,12 @@ import { EchoService } from '../../../../services/echo/echo.service'
 })
 export class MapaComponent implements OnInit {
     private map: any
-    private userMaker: L.Marker<any> | undefined
-    // private reportes?: ReporteDataMapaVM[]
+    private lastNewMarker: L.Marker | null = null
 
-    constructor(
-        // private _reporteService: ReporteService,
-        private _echoService: EchoService
-    ) {}
+    // reporte-mapa.component.ts
+    @Input() reporte!: ReporteDataMapaVM
+
+    constructor(private _echoService: EchoService) {}
 
     ngOnInit(): void {
         this._echoService.listenToReportes((data) => {
@@ -31,16 +27,16 @@ export class MapaComponent implements OnInit {
 
         this._echoService.listenReporteUpdated((id) => {
             console.log('reporte actualizado', id)
-            // this.loadMarkers()
         })
-        // forkJoin({ reportes: this._reporteService.getReportes() }).subscribe({
-        //     next: ({ reportes }) => {
-        //         this.reportes = reporteMapper(reportes.data)
-        //         this.loadMarkers()
-        //     },
-        //     error: (err) => {},
-        // })
         this.initMap()
+    }
+
+    ngOnChanges() {
+        if (this.reporte) {
+            console.log('🗺️ Recibido en hijo reporte:', this.reporte)
+            this.focusOnReporte(this.reporte)
+            // puedes enfocar aquí también si quieres
+        }
     }
 
     private initMap() {
@@ -50,22 +46,25 @@ export class MapaComponent implements OnInit {
         )
     }
 
-    private focusOnReporte(reporte: any) {
+    private focusOnReporte(reporte: ReporteDataMapaVM) {
         if (!reporte?.latitud || !reporte?.longitud) return
 
         const lat = Number(reporte.latitud)
         const lng = Number(reporte.longitud)
 
-        // Centra el mapa
         this.map.setView([lat, lng], 18)
 
-        // Agrega el marcador
-        const marker = L.marker([lat, lng], {
-            icon: leafletHelper.alertIcon, // Usa el mismo ícono que los demás
+        // Eliminar el marcador anterior si existe
+        if (this.lastNewMarker) {
+            this.map.removeLayer(this.lastNewMarker)
+        }
+
+        // Crear nuevo marcador
+        this.lastNewMarker = L.marker([lat, lng], {
+            icon: leafletHelper.alertIcon,
         }).addTo(this.map)
 
-        // Popup opcional con contenido dinámico
-        marker
+        this.lastNewMarker
             .bindPopup(
                 `<strong>📍 Nuevo reporte</strong><br>${
                     reporte.categoria || ''
@@ -73,16 +72,4 @@ export class MapaComponent implements OnInit {
             )
             .openPopup()
     }
-
-    // private loadMarkers() {
-    //     if (this.reportes?.length === 0) return
-
-    //     this.reportes!.forEach((reporte) => {
-    //         const marker = L.marker(
-    //             [Number(reporte.latitud), Number(reporte.longitud)],
-    //             { icon: leafletHelper.alertIcon }
-    //         ).addTo(this.map)
-    //         marker.bindPopup(`<strong>${reporte.categoria}</strong>`)
-    //     })
-    // }
 }

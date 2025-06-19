@@ -5,7 +5,7 @@ export interface ReporteShowDto {
 export interface ReporteShow {
     id: number
     categoria: string
-    imagen: null
+    imagen?: string
     descripcion: string
     direccion: string
     cliente: string

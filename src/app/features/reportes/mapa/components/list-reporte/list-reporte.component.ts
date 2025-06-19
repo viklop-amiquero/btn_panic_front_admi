@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, EventEmitter, OnInit, Output } from '@angular/core'
 import { ReporteService } from '../../../reporte/services/reporte.service'
 import { ConfirmDialogService } from '../../../../services/confirmdialog/confirm-dialog.service'
 import { ReporteDataMapaVM } from '../../../models/vms/reporte-data-mapa.vm'
@@ -16,6 +16,9 @@ export class ListReporteComponent implements OnInit {
 
     dataSource!: ReporteDataMapaVM[]
     private channel: any
+
+    @Output()
+    reporte = new EventEmitter<ReporteDataMapaVM>()
 
     constructor(
         private _reporteService: ReporteService,
@@ -54,5 +57,9 @@ export class ListReporteComponent implements OnInit {
         this._reporteService.getReporteById(id).subscribe(({ data }) => {
             this._confirmDialogService.updateReporte(data)
         })
+    }
+
+    selectReporte(data: ReporteDataMapaVM): void {
+        this.reporte.emit(data)
     }
 }
