@@ -30,6 +30,11 @@ export class ListReporteComponent implements OnInit {
             console.log('nuvo reporte', data)
             this.getReportes()
         })
+
+        this._echoService.listenReporteUpdated((id) => {
+            console.log('reporte actualizado', id)
+            this.getReportes()
+        })
     }
 
     ngOnDestroy(): void {
@@ -46,17 +51,8 @@ export class ListReporteComponent implements OnInit {
     }
 
     showReporte(id: number) {
-        // console.log(id)
         this._reporteService.getReporteById(id).subscribe(({ data }) => {
-            // console.log(resp)
             this._confirmDialogService.updateReporte(data)
-        })
-    }
-
-    listenToReportes(): void {
-        this._echoService.listenToReportes((data) => {
-            console.log('📡 Nuevo reporte recibido:', data)
-            this.getReportes()
         })
     }
 }

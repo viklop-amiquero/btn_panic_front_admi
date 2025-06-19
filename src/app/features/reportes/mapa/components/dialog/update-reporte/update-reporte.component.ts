@@ -18,6 +18,7 @@ export class UpdateReporteComponent {
         private _reporteService: ReporteService,
         private _snackBarService: SnackbarService
     ) {}
+
     onSubmit(id: number) {
         // console.log(id)
         this._reporteService.updateReporte(id).subscribe({

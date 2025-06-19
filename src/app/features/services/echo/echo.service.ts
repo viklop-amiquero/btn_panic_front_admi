@@ -31,25 +31,21 @@ export class EchoService {
 
     listenToReportes(callback: (data: any) => void) {
         this.echo
-            .private('reportes') // canal privado
+            .private('reportes')
             .listen('.reporte.creado', (event: any) => {
                 callback(event)
             })
     }
 
-    // listenPublicReportes(callback: (data: any) => void) {
-    //     this.echo
-    //         .channel('reportes') // canal público
-    //         .listen('.reporte.creado', (event: any) => {
-    //             console.log('📡 Público:', event)
-    //             callback(event)
-    //         })
-    // }
+    listenReporteUpdated(callback: (id: number) => void) {
+        this.echo
+            .private('reporte-updated') // canal privado
+            .listen('.reporte.actualizado', (event: any) => {
+                callback(event)
+            })
+    }
 
     disconnect() {
         this.echo.leave('reportes')
     }
-    // listenToReportes(callback: (data: any) => void) {
-    //     this.echo.private('reportes').listen('.reporte.creado', callback)
-    // }
 }
