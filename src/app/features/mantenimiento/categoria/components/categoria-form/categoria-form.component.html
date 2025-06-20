@@ -1,0 +1,45 @@
+<form
+    *ngIf="form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="form-container mat-elevation-z2"
+>
+    <h2 class="form-title">
+        {{ title }}
+        <span *ngIf="span?.show">{{ span?.title | titlecase }}</span>
+    </h2>
+
+    <div class="form-grid">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nombre de la categoría</mat-label>
+            <input matInput formControlName="nombre" />
+            <mat-error *ngIf="isInvalidField('nombre')">
+                {{ getErrorMessage('nombre') }}
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Descripción</mat-label>
+            <textarea
+                matInput
+                rows="3"
+                formControlName="descripcion"
+            ></textarea>
+            <mat-error *ngIf="isInvalidField('descripcion')">
+                {{ getErrorMessage('descripcion') }}
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+        <button
+            mat-flat-button
+            color="primary"
+            type="submit"
+            [disabled]="form.invalid"
+        >
+            <mat-icon>save</mat-icon>
+            Guardar Categoría
+        </button>
+    </div>
+</form>

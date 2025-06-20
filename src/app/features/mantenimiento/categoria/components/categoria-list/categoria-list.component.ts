@@ -39,7 +39,6 @@ export class CategoriaListComponent implements OnInit {
     getPermission() {
         this.permiso_id =
             this._permissionService.filterMenu('usuarios')[0].permiso_id
-        console.log(this.permiso_id)
         if (this.permiso_id !== 2) {
             this.displayedColumns.push('acciones')
         }
@@ -48,7 +47,6 @@ export class CategoriaListComponent implements OnInit {
     getCategorias(page: number): void {
         this._categoriaService.getCategorias(page).subscribe({
             next: (resp) => {
-                console.log(resp.data)
                 this.datasource = resp.data
                 this.totalItems = resp.meta.total
                 this.pageSize = resp.meta.per_page

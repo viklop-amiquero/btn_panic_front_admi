@@ -29,7 +29,7 @@ export class CreateUsuarioPageComponent
         private _roleService: RolService,
         private _usuarioService: UsuarioService,
         private _snackbarService: SnackbarService,
-        private _rouer: Router
+        private _router: Router
     ) {
         super(_validatorService)
     }
@@ -72,11 +72,12 @@ export class CreateUsuarioPageComponent
                 next: ({ message }) => {
                     this._snackbarService.success(`${message}`)
                     this.form.reset()
-                    this._rouer.navigate([RoutesName.USUARIO.index.route])
+                    this._router.navigate([RoutesName.USUARIO.index.route])
                 },
                 error: (err) => {
                     this._snackbarService.error(
-                        'Ocurió un error, por favor inténtelo más tarde'
+                        'Ocurió un error, por favor inténtelo más tarde',
+                        3000
                     )
                 },
             })
