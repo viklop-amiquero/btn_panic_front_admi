@@ -1,1 +1,9 @@
-<p>edit-categoria-page works!</p>
+<categoria-form
+    [form]="form"
+    [title]="title"
+    [span]="span"
+    (submitted)="onSubmit()"
+    [isInvalidField]="isInvalidField.bind(this)"
+    [getErrorMessage]="getErrorMessage.bind(this)"
+>
+</categoria-form>

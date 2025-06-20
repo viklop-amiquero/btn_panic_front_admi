@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { CategoriaDto } from '../../models/dtos/categoria-paged.dto'
 import { CategoriaService } from '../../services/categoria.service'
 import { SnackbarService } from '../../../../../shared/services/snackbar/snackbar.service'
 import { ConfirmDialogService } from '../../../../services/confirmdialog/confirm-dialog.service'
 import { PermissionService } from '../../../../services/permission/permission.service'
 import { MatPaginator, PageEvent } from '@angular/material/paginator'
 import { RoutesName as rn } from '../../../../../shared/routes/routes'
+import { CategoriaDto } from '../../models/dtos/categoria.dto'
 @Component({
     selector: 'categoria-list',
     standalone: false,

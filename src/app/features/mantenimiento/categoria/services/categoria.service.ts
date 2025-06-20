@@ -7,6 +7,7 @@ import { Observable } from 'rxjs'
 import { CategoriaPagedDto } from '../models/dtos/categoria-paged.dto'
 import { CategoriaFormRequest } from '../models/requests/categoria-form.request'
 import { MessageResponse } from '../../../models/interfaces/message.response'
+import { CategoriaListDto } from '../models/dtos/categoria-list.dto'
 
 @Injectable({
     providedIn: 'root',
@@ -31,6 +32,17 @@ export class CategoriaService {
         )
     }
 
+    getCategoriaById(id: number): Observable<CategoriaListDto> {
+        return this._http.get<CategoriaListDto>(
+            `${this._apiUrl}/api/categoria/${id}`,
+            {
+                headers: this._headerHttpService.getHeaders(
+                    this._tokenService.getToken()
+                ),
+            }
+        )
+    }
+
     createCategoria(data: CategoriaFormRequest): Observable<MessageResponse> {
         return this._http.post<MessageResponse>(
             `${this._apiUrl}/api/categoria`,
@@ -47,7 +59,7 @@ export class CategoriaService {
         id: number,
         data: CategoriaFormRequest
     ): Observable<MessageResponse> {
-        return this._http.post<MessageResponse>(
+        return this._http.put<MessageResponse>(
             `${this._apiUrl}/api/categoria/${id}`,
             data,
             {

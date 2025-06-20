@@ -111,19 +111,19 @@ export class EditUsuarioPageComponent
 
         this.onSubmitForm(this.form, () => {
             const request = this.getCurrentCredentials()
-            console.log(request)
             const id = this.id_usuario
 
             this._usuarioService.updateUsuario(id, request).subscribe({
                 next: ({ message }) => {
-                    this._snackbarService.success(`${message}`)
+                    this._snackbarService.success(`${message}`, 3000)
 
                     this.form.reset()
                     this._router.navigate([RoutesName.USUARIO.index.route])
                 },
                 error: (err) => {
                     this._snackbarService.error(
-                        'Ocurió un error, por favor inténtelo más tarde'
+                        'Ocurió un error, por favor inténtelo más tarde',
+                        3000
                     )
                 },
             })
