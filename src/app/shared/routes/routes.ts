@@ -18,6 +18,11 @@ export const RoutesName = {
         reporte: { route: 'reporte' },
         mapa: { route: 'mapa' },
     },
+    CATEGORIA: {
+        index: { route: 'categoria' },
+        create: { route: 'create' },
+        edit: { route: 'edit' },
+    },
     PAGESMESSAGE: {
         unauthorized: { route: 'unauthorized' },
         notfound: { route: 'not-found' },

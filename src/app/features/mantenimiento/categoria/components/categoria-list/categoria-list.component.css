@@ -1,0 +1,60 @@
+th{
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Contenedor general */
+.categoria-list-container {
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+/* Tabla responsiva */
+table {
+    width: 100%;
+    min-width: 600px; /* Asegura que no se corte contenido en pantallas pequeñas */
+}
+
+/* Centrar contenido de columnas */
+th.mat-header-cell,
+td.mat-cell {
+    text-align: center;
+}
+
+/* Alineación especial para texto */
+td.mat-cell:first-child,
+th.mat-header-cell:first-child {
+    text-align: left;
+}
+
+
+
+/* Contenedor de botones de acción */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.estado {
+    text-align: center;
+}
+.index {
+    text-align: center;
+}
+
+/* Responsive: ajusta la tabla en pantallas pequeñas */
+@media (max-width: 768px) {
+    .categoria-list-container {
+        padding: 0.5rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    table {
+        min-width: 100%;
+    }
+}
+

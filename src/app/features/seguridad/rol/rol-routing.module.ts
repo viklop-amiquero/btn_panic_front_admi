@@ -22,7 +22,6 @@ const routes: Routes = [
         data: { menuKey: 'roles', action: 'create' },
     },
     {
-        // path: `${rn.ROL.edit.route}/:id`,
         path: `${rn.ROL.edit.route}/:id`,
         canActivate: [roleMenuExistsGuard, noEditAdmiGuard, permisionGuard],
         component: EditRolPageComponent,

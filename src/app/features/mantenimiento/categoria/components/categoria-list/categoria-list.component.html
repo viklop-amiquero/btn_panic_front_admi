@@ -1,0 +1,85 @@
+<div class="categoria-list-container">
+    <div style="overflow-x: auto">
+        <table mat-table [dataSource]="datasource" class="mat-elevation-z8">
+            <!-- N° Column -->
+            <ng-container matColumnDef="no">
+                <th mat-header-cell *matHeaderCellDef>#</th>
+                <td
+                    mat-cell
+                    *matCellDef="let element; let i = index"
+                    class="index"
+                >
+                    {{ (currentPage - 1) * pageSize + i + 1 }}
+                </td>
+            </ng-container>
+
+            <!-- Nombre Column -->
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+            </ng-container>
+
+            <!-- Descripción Column -->
+            <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef>Descripción</th>
+                <td mat-cell *matCellDef="let element">
+                    {{ element.descripcion }}
+                </td>
+            </ng-container>
+
+            <!-- Estado Column -->
+            <ng-container matColumnDef="estado">
+                <th mat-header-cell *matHeaderCellDef>Estado</th>
+                <td mat-cell *matCellDef="let element" class="estado">
+                    <span [appEstado]="element.estado"> </span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones" *ngIf="permiso_id !== 2">
+                <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="action-buttons">
+                        <button
+                            [routerLink]="
+                                '/' +
+                                r_categoria +
+                                '/' +
+                                r_categoriaEdit +
+                                '/' +
+                                element.id
+                            "
+                            mat-icon-button
+                            color="primary"
+                            style="color: #ff8904"
+                        >
+                            <mat-icon>edit</mat-icon>
+                            <!-- Editar -->
+                        </button>
+
+                        <button
+                            mat-icon-button
+                            color="warn"
+                            style="color: #ef4444"
+                            (click)="onDeleteCategoria(element.id)"
+                            *ngIf="element.estado !== '0' && permiso_id === 1"
+                        >
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Header & Rows -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator
+            [length]="totalItems"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[5, 10, 20]"
+            (page)="onPageChange($event)"
+        >
+        </mat-paginator>
+    </div>
+</div>

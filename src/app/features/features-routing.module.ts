@@ -58,6 +58,19 @@ const routes: Routes = [
                 ],
             },
             {
+                path: rn.CATEGORIA.index.route,
+                component: HeaderLayoutComponent,
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () =>
+                            import(
+                                './mantenimiento/categoria/categoria.module'
+                            ).then((m) => m.CategoriaModule),
+                    },
+                ],
+            },
+            {
                 path: rn.REPORTES.reporte.route,
                 component: HeaderLayoutComponent,
                 children: [
